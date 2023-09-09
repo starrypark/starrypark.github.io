@@ -1,6 +1,9 @@
-- type: dates
-  title: Dates
-  url: /dates/
+- type: Statistics
+  title: Statistics
+  url: /Statistics/
+- type: Mathematics
+  title: Mathematics
+  url: /Mathematics/
 #- type: categories
 #  title: Categories
 #  url: /categories/
