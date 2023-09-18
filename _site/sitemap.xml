@@ -17,6 +17,12 @@
 <lastmod>2023-09-08T00:35:05+09:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/Mathematics/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/Statistics/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/about/</loc>
 </url>
 <url>
@@ -24,9 +30,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/categories/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/dates/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
