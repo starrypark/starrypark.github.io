@@ -2,7 +2,7 @@
 title: 생존분석 기본 용어 정리
 description: Survival Analysis에서, Counting Process에 대한 기본 개념을 정리
 author: starrypark
-date: 2024-09-20 10:00:20 +0800
+date: 2024-06-11 10:00:20 +0800
 categories: [Statistics, Survival Analysis]
 tags: [Conformal Prediction, Statistics]
 pin: true
