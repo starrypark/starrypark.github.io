@@ -1,21 +1,19 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+order: 1
 ---
-
-# 박재민
 
 📧 starrypark@snu.ac.kr | 🔗 [Blog](https://starrypark.github.io) | 🐙 [GitHub](https://github.com/starrypark)
 
 ## 자기소개
 
-신선한 시각과 열정을 가진 데이터 사이언티스트 지원자입니다. 통계학과 컴퓨터 과학을 전공하며 데이터 분석, 머신러닝, 딥러닝에 대한 깊이 있는 이해를 쌓았습니다. 실무 프로젝트 경험을 통해 데이터 기반 의사결정의 중요성을 인식하고 있으며, 비즈니스 문제를 해결하는 데 기여하고자 합니다.
+저는 수와 데이터를 보고 끊임없이 생각하며 정보를 찾아낼 수 있는 데이터 사이언티스트를 희망합니다. 학사 수학 전공, 석사 통계학 전공으로 탄탄한 수학, 통계학 베이스를 통해 명확한 근거에 기반한 데이터 분석을 지향합니다. 일반적인 방법으로 분석하기 힘든 데이터에 대해 필요한 지식을 빠르고 정확하게 익힌 뒤 관련된 분석을 진행한 경험이 다수 있습니다. 앞으로도 다양한 데이터가 주어졌을 때 흥미와 호기심을 가지고 데이터 분석 경험을 쌓아나갈 예정입니다.  
 
 ## 학력
 
 **서울대학교**, 서울  
-통계학 석사과정 (컴퓨터 과학 부전공)  
+통계학 석사과정  
 2023년 9월 - 2025년 8월 졸업예정  
 학점: 3.98/4.3
 
@@ -24,13 +22,19 @@ order: 4
 2016년 3월 - 2023년 2월  
 학점: 3.8/4.5
 
-## 기술 스택
+## 연구 분야
+- Time-Series Analysis(시계열 분석)
+- Wearable Device Data(웨어러블 기기 데이터)
+- Factor Analysis(요인 분석)
+- Spatio-Temporal Analysis(시공간 통계계)
 
-- **프로그래밍 언어**: Python, R, SQL, Matlab, SAS
-- **데이터 분석**: Pandas, NumPy, SciPy, Statsmodels
-- **머신러닝/딥러닝**: Scikit-learn, TensorFlow, PyTorch
-- **데이터 시각화**: Matplotlib, Seaborn, Plotly
-- **버전 관리**: Git, GitHub
+## 기술
+
+- **프로그래밍 언어**: Python, R, SQL, Matlab, SAS 등
+- **데이터 분석**: Pandas, NumPy, Statsmodels, Tidyverse 등 
+- **머신러닝/딥러닝**: Scikit-learn, TensorFlow, PyTorch 등
+- **데이터 시각화**: Matplotlib, Seaborn, ggplot2 등
+- **버전 관리**: Git, GitHub 등
 
 ## 프로젝트 경험
 
