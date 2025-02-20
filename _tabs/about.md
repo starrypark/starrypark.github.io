@@ -4,5 +4,77 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+# 박재민
+
+📧 starrypark@snu.ac.kr | 🔗 [Blog](https://starrypark.github.io) | 🐙 [GitHub](https://github.com/starrypark)
+
+## 자기소개
+
+신선한 시각과 열정을 가진 데이터 사이언티스트 지원자입니다. 통계학과 컴퓨터 과학을 전공하며 데이터 분석, 머신러닝, 딥러닝에 대한 깊이 있는 이해를 쌓았습니다. 실무 프로젝트 경험을 통해 데이터 기반 의사결정의 중요성을 인식하고 있으며, 비즈니스 문제를 해결하는 데 기여하고자 합니다.
+
+## 학력
+
+**서울대학교**, 서울  
+통계학 석사과정 (컴퓨터 과학 부전공)  
+2023년 9월 - 2025년 8월 졸업예정  
+학점: 3.98/4.3
+
+**고려대학교**, 서울  
+수학 학사 (통계학 부전공)  
+2016년 3월 - 2023년 2월  
+학점: 3.8/4.5
+
+## 기술 스택
+
+- **프로그래밍 언어**: Python, R, SQL, Matlab, SAS
+- **데이터 분석**: Pandas, NumPy, SciPy, Statsmodels
+- **머신러닝/딥러닝**: Scikit-learn, TensorFlow, PyTorch
+- **데이터 시각화**: Matplotlib, Seaborn, Plotly
+- **버전 관리**: Git, GitHub
+
+## 프로젝트 경험
+
+### 고객 이탈 예측 모델 개발
+*2024년 9월 - 2024년 12월*
+- 통신사 데이터를 활용하여 고객 이탈 예측 모델 개발
+- 랜덤 포레스트, XGBoost 등 다양한 알고리즘 비교 분석
+- 모델 정확도 85% 달성, 비즈니스 인사이트 도출
+
+### 주식 시장 분석 대시보드 구축
+*2024년 3월 - 2024년 6월*
+- KOSPI 상위 100개 기업의 실시간 주가 데이터 수집 및 분석
+- Dash를 이용한 인터랙티브 대시보드 개발
+- 기술적 지표와 뉴스 감성 분석을 결합한 종합 분석 제공
+
+## Internship
+
+**LG CNS**, Data Science 인턴  
+2024년 1월 - 2024년 2월
+- 생성형 AI 서비스 개발 프로젝트에 참여
+- LLM 모델의 Fine-Tuning의 다양한 방법론에 대한 연구, 구현과 성능, 시간, 메모리 등 다양한 관점에서 비교
+- Python과 Pytorch를 활용한 Fine-Tuning Pipeline 구축
+
+
+## 자격증
+
+- SQL 개발자(SQLD), 한국데이터산업진흥원, 2025년 취득
+- 데이터 분석 준전문가(ADsP), 한국데이터산업진흥원, 2023년 취득
+- OPIc, IH
+
+## 수상 경력
+
+- 석사과정생연구장려금, 한국연구재단, 2024-2025  
+  - 연간 1,200만원 규모의 연구지원금 수혜  
+  - 연구주제: "Spatio-Temporal Analysis for Wearable Device Data"
+
+- 이공계국가장학금, 한국장학재단, 2016-2018  
+  - 우수한 이공계 인재 양성을 위한 국가 지원 장학금
+
+- 신입생우수장학금, 고려대학교, 2016  
+  - 입학 성적 우수자에게 수여되는 장학금
+
+## 언어 능력
+
+- 한국어 (모국어)
+- 영어 (중상급, OPIc IH)
+
