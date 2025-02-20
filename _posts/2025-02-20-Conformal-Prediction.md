@@ -2,7 +2,7 @@
 title: Conformal Prediction
 description: Conformal Prediction에 관한 기본적인 설명 (증명은 상당부분 생략)
 author: cotes
-date: 2025-02-20 12:00:20 +0800
+date: 2025-02-20 10:00:20 +0800
 categories: [Blogging, Demo]
 tags: [typography]
 pin: true
