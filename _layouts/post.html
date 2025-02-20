@@ -10,6 +10,10 @@ script_includes:
   - comment
 ---
 
+{% if page.use_math %}
+  {% include mathjax_support.html %}
+{% endif %}
+
 {% include lang.html %}
 
 {% include toc-status.html %}
