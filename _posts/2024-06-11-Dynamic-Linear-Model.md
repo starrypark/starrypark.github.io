@@ -1,6 +1,6 @@
 ---
-title: 생존분석 기본 용어 정리
-description: Survival Analysis에서, Counting Process에 대한 기본 개념을 정리
+title: Dynamic Linear Model
+description: Dynamic Linear model의 기본적인 개념과 분포 개념 설명명
 author: starrypark
 date: 2024-06-11 10:00:20 +0800
 categories: [Statistics, Survival Analysis]
