@@ -3,7 +3,7 @@ title: Dynamic Linear Model
 description: Dynamic Linear model의 기본적인 개념과 분포 개념 설명
 author: starrypark
 date: 2024-06-11 10:00:20 +0800
-categories: [Statistics, Survival Analysis]
+categories: [Statistics, Time-Series Analysis, Bayesian Analysis]
 tags: [Conformal Prediction, Statistics]
 pin: true
 math: true
