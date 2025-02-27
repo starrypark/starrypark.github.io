@@ -4,7 +4,7 @@ description: Dynamic Linear model의 기본적인 개념과 분포 개념 설명
 author: starrypark
 date: 2024-06-11 10:00:20 +0800
 categories: [Statistics, Time-Series Analysis, Bayesian Analysis]
-tags: [Conformal Prediction, Statistics]
+tags: [Dynamic Linear Model, Statistics]
 pin: true
 math: true
 mermaid: true
