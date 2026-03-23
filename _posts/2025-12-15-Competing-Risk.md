@@ -1,89 +1,158 @@
 ---
-title: Docker에 대한 설명
-description: 협업 시 필요한 Docker에 대한 소개
+title: "경쟁 위험 모델 (Competing Risk)"
+description: CSH와 SH(Fine-Gray)의 차이, CIF 해석, 그리고 실무에서 두 모델을 어떻게 써야 하는지 정리
 author: starrypark
-date: 2025-12-26 11:26:31 +0810
-categories: [Computer Science]
-tags: [Docker, Image, Container]
+date: 2025-12-15 13:22:34 +0810
+categories: [Survival Analysis, Model Evaluation]
+tags: [statistics, survival analysis, competing risk, Fine-Gray, biostatistics]
 pin: true
 math: true
 mermaid: true
 use_math: true
 ---
 
-# Docker로 “가상 환경 + 버전 일치”를 잡는 법: image / container 개념부터 실전 삽질까지 (Windows+WSL 포함)
+## 개요
 
-> **필수 키워드:** Docker
+생존분석에서 competing risk는 생각보다 자주 등장한다.
 
-저는 “로컬에서는 되는데 서버에 올리면 깨지는” 문제를 정말 많이 겪었습니다. 특히 Python API(FastAPI) + R Shiny 조합처럼 언어/의존성이 섞이는 순간, 버전 차이와 시스템 라이브러리 문제는 거의 확정적으로 터집니다.  
-그래서 결국 저는 **Docker로 실행 환경 자체를 고정**하는 방향으로 정리했습니다.
+예를 들어 위암 환자의 "암 사망"을 분석한다고 하자. 관찰 중에 "다른 원인 사망"도 발생한다. 이때 다른 원인 사망은 단순 censoring이 아니다. **경쟁 사건(competing event)**이다. 다른 원인으로 사망한 사람은 더 이상 암 사망을 관찰할 수 없고, 암 사망의 risk set 해석 자체가 달라진다.
 
-이 글은 “Docker가 뭔지”만 설명하지 않습니다. **왜 Docker가 필요했는지, 어떻게 적용했는지, 어디서 터졌고 어떤 방식으로 복구했는지**까지, 실전에서 겪는 흐름 그대로 정리합니다.
+이 문제를 무시하면 위험비(HR)의 해석이 틀어지고, 누적발생확률(CIF)을 계산해도 의미가 꼬인다.
 
----
-
-## 1. 이 기술을 왜 다루게 되었나
-
-제가 Docker를 본격적으로 다루게 된 이유는 단순합니다.
-
-- 로컬에서는 패키지가 잘 깔리는데, 컨테이너 빌드에서는 `EOF`, `ANTICONF` 같은 에러로 죽음
-- R 패키지 설치에서 리눅스 시스템 라이브러리(헤더)가 없어서 컴파일 실패
-- Windows + Docker Desktop + WSL2 조합에서 빌드가 중간에 뻗으면서 WSL distro가 꼬임
-
-즉, **“버전 불일치 + 실행 환경 차이”**가 원인이었습니다.  
-이 문제를 한 번에 해결하려면, 결국 실행 환경 자체를 “동일한 박스”로 고정해야 했고, 그게 Docker였습니다.
+이 노트는 competing risk에서 핵심 개념인 **CSH**와 **SH(Fine–Gray)**의 차이를 정리하고, 실무에서 어떻게 선택하고 보고해야 하는지를 다룬다.
 
 ---
 
-## 2. 결론부터 말하면: 내가 선택한 방식
+## 1. Competing Risk를 왜 별도로 다루는가
 
-제가 최종적으로 선택한 방식은 아래처럼 정리됩니다.
+경쟁 사건이 발생하면 그 사람은 더 이상 관심 사건을 겪을 수 없다. 경쟁 사건을 단순 censoring으로 처리하면 다음 가정이 무너진다.
 
-1) **Docker image로 실행 환경을 고정**하고  
-2) **container로 실행을 분리**하며  
-3) Python API와 R Shiny는 `docker-compose`로 묶되  
-4) Shiny에서 API 호출은 `http://api:8000`처럼 **서비스 이름 기반**으로 연결합니다.
+- 관심 사건이 관찰될 기회가 남아 있다는 가정
+- censoring 독립성 가정의 의미
 
-그리고 Windows 환경에서는 **WSL 리소스 설정(.wslconfig)**이 사실상 필수였습니다. (그 전에는 `rpc error: EOF`가 반복적으로 발생했습니다.) [R1]
+그 결과 Kaplan-Meier로 계산한 "암 사망 확률"은 일반적으로 **과대추정**이 된다.
 
 ---
 
-## 3. 배경지식: 이것만 알면 글을 따라올 수 있다
+## 2. 핵심 개념: CIF
 
-여기서는 핵심만 잡습니다. Docker를 처음 보는 분들도 이 파트만 이해하면 뒤가 따라옵니다.
+Competing risk에서 가장 중요한 확률 객체는 **누적발생확률(Cumulative Incidence Function, CIF)**이다.
 
-### 3.1 Docker란 무엇인가 (가상환경 vs Docker)
+사건 종류 $k \in \{1, \ldots, K\}$에서 관심 사건을 $k=1$이라 하면:
 
-많은 분들이 “Docker = 가상머신(VM)” 정도로 생각하지만, 실제 느낌은 조금 다릅니다.
+$$F_k(t) = P(T \leq t,\; J = k)$$
 
-- **가상머신(VM)**: OS까지 통째로 가상화
-- **Docker**: 호스트 OS 커널을 공유하고, 파일시스템/프로세스를 격리해서 실행
+여기서 $J$는 사건 타입이다. "$t$까지 사건 $k$가 발생할 확률"은 CIF로 말해야 올바르다. Kaplan-Meier로 계산한 값은 competing risk를 무시하기 때문에 과대추정이 발생한다.
 
-그래서 Docker는 대체로 VM보다 가볍고, 실행과 배포가 빠릅니다.
+---
 
-### 3.2 image / container 차이
+## 3. CSH: Cause-Specific Hazard
 
-이걸 정확히 구분하면 이후 모든 것이 쉬워집니다.
+### 정의
 
-- **Docker image**: “레시피/스냅샷” (정해진 환경이 담긴 템플릿)
-- **Docker container**: image를 실제로 실행한 “프로세스”
+사건 타입 $k$에 대한 **Cause-Specific Hazard (CSH)**는 다음과 같다.
 
-비유로는 이런 느낌입니다.
+$$\lambda_k(t) = \lim_{\Delta t \to 0} \frac{P(t \leq T < t+\Delta t,\; J=k \mid T \geq t)}{\Delta t}$$
 
-- image = **게임 설치 파일**
-- container = **게임 실행 중인 프로세스**
+**해석**: "$t$까지 아무 사건도 발생하지 않은 사람들 중에서, 바로 그 다음 순간에 사건 $k$가 발생할 순간위험"이다.
 
-**버전 일치**를 위해서 중요한 건 image입니다.  
-컨테이너가 몇 번 죽어도, image만 안정적이면 다시 띄우면 그만입니다.
+Risk set은 **아직 어떤 사건도 경험하지 않은 사람들**이다. 경쟁 사건이 발생한 사람은 risk set에서 제외된다.
 
-### 3.3 왜 버전 일치에서 Docker가 강력한가
+### 추정
 
-버전이 깨지는 이유는 늘 같습니다.
+실무에서는 다음과 같이 접근한다.
 
-- OS 레벨 라이브러리 다름
-- python/R 패키지 버전 다름
-- 컴파일러/헤더 유무 다름
-- locale/timezone 차이
+- 사건 $k$만 event = 1로 처리
+- 나머지(경쟁 사건 포함)는 censoring 처리
+- Cox model로 적합
 
-Docker image에는 이런 것들이 “굳어버린 상태”로 들어갑니다.  
-그래서 “로컬만 되는 코드”를 “어디서나 되는 코드”로 바꾸기 좋습니다.
+$$\lambda_k(t \mid X) = \lambda_{k0}(t)\exp(\beta_k^\top X)$$
+
+### 용도
+
+CSH는 **원인별 위험요인(etiology) 분석**에 적합하다. "이 변수가 암 사망 자체의 위험을 올리는가?"라는 질문에 답할 때 쓴다.
+
+---
+
+## 4. SH: Subdistribution Hazard (Fine–Gray)
+
+### 정의
+
+**Subdistribution Hazard (SH)**는 CIF를 직접 모델링하기 위해 Fine과 Gray (1999)가 제안한 hazard다.
+
+$$\tilde{\lambda}_k(t) = \lim_{\Delta t \to 0} \frac{P(t \leq T < t+\Delta t,\; J=k \mid T \geq t \text{ or } (T \leq t,\; J \neq k))}{\Delta t}$$
+
+조건부의 구조가 CSH와 다르다. Risk set이 "아직 사건이 없는 사람"뿐 아니라, **이미 경쟁 사건을 겪은 사람(가중 방식으로)**까지 포함한다.
+
+Fine–Gray 모델은 다음과 같다.
+
+$$\tilde{\lambda}_k(t \mid X) = \tilde{\lambda}_{k0}(t)\exp(\tilde{\beta}_k^\top X)$$
+
+### 해석 주의
+
+SH의 계수는 "순간위험의 증가"라기보다 **CIF를 키우는 방향**으로 이해하는 것이 안전하다.
+
+### 용도
+
+SH는 **절대위험(CIF) 예측**에 적합하다. "이 변수가 있을 때 3년 내 암 사망 확률이 얼마나 달라지는가?"라는 질문에 답할 때 쓴다.
+
+---
+
+## 5. CSH vs SH: 언제 무엇을 쓰는가
+
+| 목적 | 적합한 모델 |
+|---|---|
+| 원인별 위험요인 해석 (etiology) | CSH |
+| 절대위험(CIF) 예측 및 비교 | SH (Fine–Gray) |
+| 보고서에 HR을 쓸 때 | 반드시 CSH/SH 중 어느 것인지 명시 |
+
+둘 중 어느 것이 "맞는" 모델이냐의 문제가 아니다. **목적이 다른 것이다.**
+
+---
+
+## 6. 자주 발생하는 혼동
+
+### CSH HR과 SH HR이 반대로 나오는 경우
+
+어떤 covariate에서 CSH HR > 1 (암 사망 위험 증가)인데 SH HR < 1 (CIF 감소 방향)이 나올 수 있다. 이는 오류가 아니라 competing risk의 본질적인 현상이다.
+
+CIF는 다음 관계를 갖는다.
+
+$$F_k(t) = \int_0^t S(u-)\, \lambda_k(u)\, du$$
+
+여기서 $S(u-)$는 "아무 사건도 안 난 상태로 버티는 확률"이고, 이 안에 경쟁 사건의 영향이 들어간다.
+
+어떤 변수가 "암 사망 위험도 올리지만 다른 원인 사망을 더 많이 올리는" 경우, $S(u-)$가 작아지면서 결과적으로 CIF는 크게 올라가지 않을 수 있다.
+
+### "HR이 크면 확률도 높아야 하지 않나?"
+
+이 오해가 실무 보고에서 가장 자주 발생한다. CSH HR이 2.0이라도 competing risk 때문에 CIF는 크게 증가하지 않을 수 있다. HR과 절대위험(CIF)은 다른 것이다.
+
+---
+
+## 7. 보고서 구성 권장 형태
+
+Competing risk가 있는 분석의 보고서는 다음 구조가 혼동을 줄인다.
+
+1. Competing risk 배경 설명 (1–2 문단)
+2. CIF 그래프 (관심 사건, 경쟁 사건 각각)
+3. CSH 결과표 (위험요인 해석용, HR의 의미 명시)
+4. SH(Fine–Gray) 결과표 (CIF 변화 방향 / 예측용, HR의 의미 명시)
+5. 결론 문장: "CSH 기준으로는 위험요인이지만, competing risk 때문에 CIF 효과는 제한적/상반됨"
+
+이 구조로 가면 "HR이 큰데 왜 확률이 안 올라가냐"는 질문에 대한 답이 이미 보고서 안에 있다.
+
+---
+
+## 8. 정리
+
+- Competing risk에서 "확률"을 말하려면 CIF를 써야 한다. KM 곡선으로 관심 사건의 절대 확률을 말하지 않는다.
+- **CSH**는 원인별 위험 해석에 적합하고, **SH(Fine–Gray)**는 CIF 예측에 적합하다.
+- 둘의 HR은 의미가 다르다. 보고서에 HR을 쓸 때는 반드시 어느 것인지 명시해야 한다.
+- 가능하면 CIF 그래프를 함께 제시한다. 숫자보다 그림이 오해를 줄인다.
+
+---
+
+## 참고문헌
+
+Fine, J. P., & Gray, R. J. (1999). A proportional hazards model for the subdistribution of a competing risk. *Journal of the American Statistical Association*, 94(446), 496–509.
