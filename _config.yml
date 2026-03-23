@@ -16,7 +16,7 @@ timezone: Asia/Seoul
 
 title: Starrypark # the main title
 
-tagline: 나의 기록지 # it will display as the subtitle
+tagline: My Log # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   통계학, 데이터 분석에 관심이 많은 통계학도입니다. 그동안 했던 것들을 기록합니다.
