@@ -8,3 +8,50 @@
 ';
 
 /* append your custom style below */
+
+/* 전체 배경 - 연한 민트 녹색 */
+body, #main-wrapper, .container-fluid {
+  background: #f4faf0 !important;
+}
+
+/* 사이드바 배경 - 밝은 연두 */
+#sidebar {
+  background: #97C459 !important;
+}
+
+/* 사이드바 활성 메뉴 */
+#sidebar .nav-link.active {
+  background: rgba(255, 255, 255, 0.28) !important;
+  color: #fff !important;
+}
+
+/* 사이드바 텍스트 */
+#sidebar a,
+#sidebar .site-title,
+#sidebar .site-subtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 포스트 카드 왼쪽 강조선 */
+.post-preview {
+  border-left: 3px solid #97C459;
+  background: #fff;
+}
+
+/* 카테고리/태그 뱃지 */
+.categories a,
+.tag,
+.btn.btn-outline-primary {
+  background: #EAF3DE !important;
+  color: #3B6D11 !important;
+  border-color: #C0DD97 !important;
+}
+
+/* 링크 색상 */
+a { color: #3B6D11; }
+a:hover { color: #639922; }
+
+/* 구분선 색상 */
+hr, .border-top {
+  border-color: #d0e8c0 !important;
+}
