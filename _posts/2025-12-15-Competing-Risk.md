@@ -1,158 +1,94 @@
 ---
-title: "경쟁 위험 모델 (Competing Risk)"
-description: CSH와 SH(Fine-Gray)의 차이, CIF 해석, 그리고 실무에서 두 모델을 어떻게 써야 하는지 정리
-author: starrypark
-date: 2025-12-15 13:22:34 +0810
-categories: [Survival Analysis, Model Evaluation]
-tags: [statistics, survival analysis, competing risk, Fine-Gray, biostatistics]
-pin: true
+title: "생존분석에서 Competing Risk 다루기: CSH와 Fine-Gray 모델의 진짜 차이"
+categories: [Data Science, Survival Analysis]
+tags: [Statistics, Competing Risk, Fine-Gray, Cause-Specific Hazard, CIF, Biostatistics]
 math: true
-mermaid: true
-use_math: true
+date: 2025-12-15 12:47:00 +0900
 ---
 
-## 개요
+생존분석(Survival Analysis)을 실제 임상 데이터나 비즈니스 데이터에 적용하다 보면 '경쟁 위험(Competing Risk)'이라는 까다로운 장벽에 부딪히게 됩니다.
 
-생존분석에서 competing risk는 생각보다 자주 등장한다.
+위암 환자의 생존 데이터를 분석한다고 상상해 볼게요. 우리의 최대 관심사는 '위암으로 인한 사망'입니다. 그런데 추적 관찰 기간 동안 교통사고나 심장마비 등 '다른 원인으로 인한 사망'이 발생할 수 있죠. 이 분들은 더 이상 위암으로 사망할 수 없는 상태가 됩니다. 이런 상황을 관찰이 끝난 단순 중도절단(Censoring)으로 처리해도 될까요? 전혀 그렇지 않습니다. 이게 바로 분석의 판도를 바꾸는 경쟁 사건(Competing Event)이거든요.
 
-예를 들어 위암 환자의 "암 사망"을 분석한다고 하자. 관찰 중에 "다른 원인 사망"도 발생한다. 이때 다른 원인 사망은 단순 censoring이 아니다. **경쟁 사건(competing event)**이다. 다른 원인으로 사망한 사람은 더 이상 암 사망을 관찰할 수 없고, 암 사망의 risk set 해석 자체가 달라진다.
+이걸 무시하고 평소처럼 모델링을 돌려버리면 위험비(Hazard Ratio, HR)의 해석이 완전히 엉뚱한 방향으로 흘러갑니다. 누적발생확률을 계산해도 숫자가 꼬여버리죠. 오늘 포스팅에서는 실무 현장에서 정말 자주 혼동하는 Cause-Specific Hazard(CSH)와 Subdistribution Hazard(SH, Fine-Gray 모델)의 차이를 명확히 짚어보고, 언제 어떤 모델을 꺼내 들어야 하는지 제 경험을 녹여 정리해 보겠습니다.
 
-이 문제를 무시하면 위험비(HR)의 해석이 틀어지고, 누적발생확률(CIF)을 계산해도 의미가 꼬인다.
+## 1. 왜 Competing Risk를 따로 고민해야 할까?
 
-이 노트는 competing risk에서 핵심 개념인 **CSH**와 **SH(Fine–Gray)**의 차이를 정리하고, 실무에서 어떻게 선택하고 보고해야 하는지를 다룬다.
+경쟁 사건이 발생했다는 건, 그 관찰 대상자가 앞으로 우리가 관심 있는 사건을 겪을 가능성이 영원히 소멸되었다는 뜻입니다. 이걸 단순히 "관찰이 중단되었다(Censored)"라고 퉁치면 생존분석의 아주 중요한 가정이 무너집니다. 일반적인 분석에서는 Censoring된 사람도 언젠가는 관심 사건을 겪을 잠재적인 위험이 남아있고, 그 중단 시점이 사건 발생과 독립적이라고 가정하거든요.
 
----
+결과적으로 경쟁 사건을 무시하고 흔히 쓰는 Kaplan-Meier 추정법으로 '암 사망 확률'을 구하게 되면, 실제 일어날 확률보다 수치가 뻥튀기되는 과대추정(Overestimation) 문제가 발생합니다. 
 
-## 1. Competing Risk를 왜 별도로 다루는가
+## 2. 진짜 발생 확률, CIF (Cumulative Incidence Function)
 
-경쟁 사건이 발생하면 그 사람은 더 이상 관심 사건을 겪을 수 없다. 경쟁 사건을 단순 censoring으로 처리하면 다음 가정이 무너진다.
-
-- 관심 사건이 관찰될 기회가 남아 있다는 가정
-- censoring 독립성 가정의 의미
-
-그 결과 Kaplan-Meier로 계산한 "암 사망 확률"은 일반적으로 **과대추정**이 된다.
-
----
-
-## 2. 핵심 개념: CIF
-
-Competing risk에서 가장 중요한 확률 객체는 **누적발생확률(Cumulative Incidence Function, CIF)**이다.
-
-사건 종류 $k \in \{1, \ldots, K\}$에서 관심 사건을 $k=1$이라 하면:
+그래서 Competing risk가 존재하는 환경에서 특정 사건이 발생할 진짜 확률을 알고 싶다면 누적발생확률, 즉 CIF를 봐야 합니다. 
+사건의 종류를 $k \in \\{1, \ldots, K\\}$ 라고 하고, 우리가 궁금한 타겟 사건을 $k=1$이라고 해볼게요.
 
 $$F_k(t) = P(T \leq t,\; J = k)$$
 
-여기서 $J$는 사건 타입이다. "$t$까지 사건 $k$가 발생할 확률"은 CIF로 말해야 올바르다. Kaplan-Meier로 계산한 값은 competing risk를 무시하기 때문에 과대추정이 발생한다.
+수식을 풀어서 읽어보면 직관적입니다. "$t$ 시점까지 타겟 사건 $k$(여기서는 $J=k$)가 발생할 확률"이죠. KM 곡선은 경쟁 사건을 무시하고 사망 확률을 누적해 버리기 때문에, 반드시 이 CIF 수식과 개념으로 접근해야만 왜곡 없는 진짜 누적 발생 확률을 얻을 수 있습니다.
 
----
+## 3. 원인 분석에 딱 맞는 CSH (Cause-Specific Hazard)
 
-## 3. CSH: Cause-Specific Hazard
-
-### 정의
-
-사건 타입 $k$에 대한 **Cause-Specific Hazard (CSH)**는 다음과 같다.
+### 정의와 해석
+먼저 특정 원인에 대한 위험 자체를 파고드는 CSH(Cause-Specific Hazard)부터 보겠습니다.
 
 $$\lambda_k(t) = \lim_{\Delta t \to 0} \frac{P(t \leq T < t+\Delta t,\; J=k \mid T \geq t)}{\Delta t}$$
 
-**해석**: "$t$까지 아무 사건도 발생하지 않은 사람들 중에서, 바로 그 다음 순간에 사건 $k$가 발생할 순간위험"이다.
+이 수식의 의미는 이렇습니다. "$t$ 시점까지 그 어떤 사건도 겪지 않고 무사히 살아남은 사람들 중에서, 아주 찰나의 순간($\Delta t$)에 사건 $k$가 발생할 순간 위험"을 뜻합니다. 
+여기서 조건부를 잘 보면 아직 아무 일도 일어나지 않은 사람들이 Risk set(위험군)을 형성합니다. 경쟁 사건을 이미 겪은 사람은 이 Risk set에서 자연스럽게 제외되죠.
 
-Risk set은 **아직 어떤 사건도 경험하지 않은 사람들**이다. 경쟁 사건이 발생한 사람은 risk set에서 제외된다.
-
-### 추정
-
-실무에서는 다음과 같이 접근한다.
-
-- 사건 $k$만 event = 1로 처리
-- 나머지(경쟁 사건 포함)는 censoring 처리
-- Cox model로 적합
+### 추정 방법
+실무에서 코드를 돌릴 때는 생각보다 세팅이 단순합니다.
+- 관심 사건 $k$만 이벤트를 1로 둡니다.
+- 나머지 경쟁 사건들은 전부 Censoring(이벤트 0)으로 덮어버립니다.
+- 그 상태로 우리가 잘 아는 Cox Proportional Hazard 모델을 적합시킵니다.
 
 $$\lambda_k(t \mid X) = \lambda_{k0}(t)\exp(\beta_k^\top X)$$
 
-### 용도
+### 언제 쓸까?
+CSH는 "이 변수가 진짜로 암 사망 자체의 위험(Etiology)을 높이는 인자인가?"라는 인과적, 생물학적 원인 분석을 할 때 아주 적합합니다.
 
-CSH는 **원인별 위험요인(etiology) 분석**에 적합하다. "이 변수가 암 사망 자체의 위험을 올리는가?"라는 질문에 답할 때 쓴다.
+## 4. 확률 예측에 강한 SH (Subdistribution Hazard, Fine-Gray)
 
----
-
-## 4. SH: Subdistribution Hazard (Fine–Gray)
-
-### 정의
-
-**Subdistribution Hazard (SH)**는 CIF를 직접 모델링하기 위해 Fine과 Gray (1999)가 제안한 hazard다.
+### 정의와 해석
+반면에 Fine과 Gray가 1999년에 제안한 SH(Subdistribution Hazard)는 아예 CIF 자체를 직접 모델링하기 위해 뼈대를 설계한 모델입니다.
 
 $$\tilde{\lambda}_k(t) = \lim_{\Delta t \to 0} \frac{P(t \leq T < t+\Delta t,\; J=k \mid T \geq t \text{ or } (T \leq t,\; J \neq k))}{\Delta t}$$
 
-조건부의 구조가 CSH와 다르다. Risk set이 "아직 사건이 없는 사람"뿐 아니라, **이미 경쟁 사건을 겪은 사람(가중 방식으로)**까지 포함한다.
-
-Fine–Gray 모델은 다음과 같다.
+수식을 가만히 들여다보면 CSH와 조건부가 사뭇 다릅니다. Risk set에 "아무 일도 없었던 사람"뿐만 아니라 "이미 경쟁 사건을 겪어버린 사람"까지 가중치를 줘서 끝까지 품고 갑니다. 이렇게 억지로 Risk set을 유지시켜야 전체 누적 확률인 CIF 곡선과 수학적으로 부드럽게 연결되거든요.
+회귀 모델의 형태 자체는 콕스 모델과 비슷하게 생겼습니다.
 
 $$\tilde{\lambda}_k(t \mid X) = \tilde{\lambda}_{k0}(t)\exp(\tilde{\beta}_k^\top X)$$
 
-### 해석 주의
+### 해석할 때 주의점
+여기서 튀어나오는 SH의 HR(Hazard Ratio) 계수는 "해당 사건의 순간 위험이 올라간다"라고 직역하면 위험합니다. 그보다는 **"절대적인 누적발생확률(CIF)의 크기를 키우는 방향으로 작동한다"**고 이해하시는 게 훨씬 안전하고 정확합니다.
 
-SH의 계수는 "순간위험의 증가"라기보다 **CIF를 키우는 방향**으로 이해하는 것이 안전하다.
+### 언제 쓸까?
+"그래서 이 요인이 있을 때 3년 안에 환자가 암으로 죽을 절대적인 확률(CIF)이 정확히 얼마나 변하는데?" 같은 예측이나 예후 평가가 필요할 때 사용합니다.
 
-### 용도
+## 5. CSH vs Fine-Gray: 정답은 없다, 목적만 있을 뿐
 
-SH는 **절대위험(CIF) 예측**에 적합하다. "이 변수가 있을 때 3년 내 암 사망 확률이 얼마나 달라지는가?"라는 질문에 답할 때 쓴다.
+둘 중 어떤 모델이 '맞다 틀리다'를 따지는 건 의미가 없습니다. 내가 데이터에 던지는 질문이 무엇이냐에 따라 도구를 골라 써야 합니다.
 
----
+| 분석 목적 | 적합한 모델 |
+| :--- | :--- |
+| 원인별 위험 요인 파악 및 병인학적(Etiology) 해석 | CSH (Cause-Specific Hazard) |
+| 실제 체감하는 절대 위험(CIF)의 예측 및 변화량 비교 | SH (Fine-Gray Subdistribution Hazard) |
+| 보고서나 논문에 HR 수치를 적을 때 | 반드시 CSH와 SH 중 어떤 것인지 명확히 표기 |
 
-## 5. CSH vs SH: 언제 무엇을 쓰는가
+## 6. 실무에서 제일 많이 받는 질문과 오해들
 
-| 목적 | 적합한 모델 |
-|---|---|
-| 원인별 위험요인 해석 (etiology) | CSH |
-| 절대위험(CIF) 예측 및 비교 | SH (Fine–Gray) |
-| 보고서에 HR을 쓸 때 | 반드시 CSH/SH 중 어느 것인지 명시 |
-
-둘 중 어느 것이 "맞는" 모델이냐의 문제가 아니다. **목적이 다른 것이다.**
-
----
-
-## 6. 자주 발생하는 혼동
-
-### CSH HR과 SH HR이 반대로 나오는 경우
-
-어떤 covariate에서 CSH HR > 1 (암 사망 위험 증가)인데 SH HR < 1 (CIF 감소 방향)이 나올 수 있다. 이는 오류가 아니라 competing risk의 본질적인 현상이다.
-
-CIF는 다음 관계를 갖는다.
+### "CSH HR은 위험하다는데, SH HR은 반대로 안전하대요. 이거 코드 에러 아닌가요?"
+어떤 변수가 암 사망 위험(CSH)은 높이는데, 결과적인 CIF 효과(SH)는 오히려 떨어뜨리는 방향으로 나올 때가 종종 있습니다. 결코 에러가 아니라 Competing risk가 만들어내는 본질적인 현상입니다. CIF를 구하는 과정을 적분으로 뜯어보면 이유를 단번에 알 수 있어요.
 
 $$F_k(t) = \int_0^t S(u-)\, \lambda_k(u)\, du$$
 
-여기서 $S(u-)$는 "아무 사건도 안 난 상태로 버티는 확률"이고, 이 안에 경쟁 사건의 영향이 들어간다.
+수식을 보면 타겟 사건 $k$의 순간 위험인 $\lambda\_k(u)$를 적분하기도 하지만, 그 앞에 $S(u-)$라는 값이 곱해져 있습니다. 이건 "이 시점까지 아무 일 없이 잘 버텨낸 확률"이에요.
+만약 어떤 변수가 암 사망 위험도 높이지만, 심장마비 같은 다른 사망 위험을 어마어마하게 더 높여버린다고 가정해 볼게요. 그러면 사람들이 암에 걸리기도 전에 이미 다른 이유로 Risk set에서 사라져 버리니 $S(u-)$가 급격하게 쪼그라듭니다. 결과적으로 두 개를 곱해서 적분한 CIF 자체는 별로 안 크거나, 오히려 감소하는 기현상이 발생하는 거죠.
 
-어떤 변수가 "암 사망 위험도 올리지만 다른 원인 사망을 더 많이 올리는" 경우, $S(u-)$가 작아지면서 결과적으로 CIF는 크게 올라가지 않을 수 있다.
+### "HR이 크면 당연히 발생 확률도 쑥쑥 높아야 하는 거 아니야?"
+방금 설명한 이유 때문에 CSH HR이 2.0으로 꽤 높게 나오더라도, 경쟁 사건이 강하게 치고 들어오면 실제 누적 확률(CIF)은 찔끔 오르고 말 수 있습니다. "위험도(HR)"와 "절대위험(CIF)"은 완전히 별개의 개념으로 분리해서 소통해야 합니다.
 
-### "HR이 크면 확률도 높아야 하지 않나?"
 
-이 오해가 실무 보고에서 가장 자주 발생한다. CSH HR이 2.0이라도 competing risk 때문에 CIF는 크게 증가하지 않을 수 있다. HR과 절대위험(CIF)은 다른 것이다.
-
----
-
-## 7. 보고서 구성 권장 형태
-
-Competing risk가 있는 분석의 보고서는 다음 구조가 혼동을 줄인다.
-
-1. Competing risk 배경 설명 (1–2 문단)
-2. CIF 그래프 (관심 사건, 경쟁 사건 각각)
-3. CSH 결과표 (위험요인 해석용, HR의 의미 명시)
-4. SH(Fine–Gray) 결과표 (CIF 변화 방향 / 예측용, HR의 의미 명시)
-5. 결론 문장: "CSH 기준으로는 위험요인이지만, competing risk 때문에 CIF 효과는 제한적/상반됨"
-
-이 구조로 가면 "HR이 큰데 왜 확률이 안 올라가냐"는 질문에 대한 답이 이미 보고서 안에 있다.
-
----
-
-## 8. 정리
-
-- Competing risk에서 "확률"을 말하려면 CIF를 써야 한다. KM 곡선으로 관심 사건의 절대 확률을 말하지 않는다.
-- **CSH**는 원인별 위험 해석에 적합하고, **SH(Fine–Gray)**는 CIF 예측에 적합하다.
-- 둘의 HR은 의미가 다르다. 보고서에 HR을 쓸 때는 반드시 어느 것인지 명시해야 한다.
-- 가능하면 CIF 그래프를 함께 제시한다. 숫자보다 그림이 오해를 줄인다.
-
----
-
-## 참고문헌
-
+### 참고문헌
 Fine, J. P., & Gray, R. J. (1999). A proportional hazards model for the subdistribution of a competing risk. *Journal of the American Statistical Association*, 94(446), 496–509.
