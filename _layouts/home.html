@@ -90,11 +90,9 @@ refactor: true
 
                 <!-- categories -->
                 {% if post.categories.size > 0 %}
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
+                  <span class="cat-badge-group">
                     {% for category in post.categories %}
-                      {{ category }}
-                      {%- unless forloop.last -%},{%- endunless -%}
+                      <span class="cat-badge">{{ category }}</span>
                     {% endfor %}
                   </span>
                 {% endif %}

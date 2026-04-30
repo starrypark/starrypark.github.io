@@ -9,49 +9,96 @@
 
 /* append your custom style below */
 
-/* 전체 배경 - 연한 민트 녹색 */
-body, #main-wrapper, .container-fluid {
-  background: #f4faf0 !important;
+/* 경기천년바탕 웹폰트 */
+@font-face {
+  font-family: 'GCB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GCB.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-/* 사이드바 배경 - 밝은 연두 */
+@font-face {
+  font-family: 'GCB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GCBB.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  font-family: 'GCB', serif !important;
+}
+
+/* 전체 배경 - 크림 아이보리 */
+body, #main-wrapper, .container-fluid {
+  background: #fdfaf4 !important;
+}
+
+/* 사이드바 배경 - 따뜻한 서피스 */
 #sidebar {
-  background: #97C459 !important;
+  background: #f4f0e8 !important;
 }
 
 /* 사이드바 활성 메뉴 */
 #sidebar .nav-link.active {
-  background: rgba(255, 255, 255, 0.28) !important;
-  color: #fff !important;
+  background: rgba(175, 169, 236, 0.2) !important;
+  color: #534ab7 !important;
 }
 
 /* 사이드바 텍스트 */
-#sidebar a,
-#sidebar .site-title,
+#sidebar .site-title {
+  color: #2a2a2a !important;
+}
+
 #sidebar .site-subtitle {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #2a2a2a !important;
+}
+
+#sidebar .nav-link {
+  color: #2a2a2a !important;
 }
 
 /* 포스트 카드 왼쪽 강조선 */
 .post-preview {
-  border-left: 3px solid #97C459;
-  background: #fff;
+  border-left: 3px solid #534ab7;
+  background: #fffdf7;
 }
 
 /* 카테고리/태그 뱃지 */
 .categories a,
 .tag,
 .btn.btn-outline-primary {
-  background: #EAF3DE !important;
-  color: #3B6D11 !important;
-  border-color: #C0DD97 !important;
+  background: #eeedfe !important;
+  color: #534ab7 !important;
+  border-color: #d4cfef !important;
 }
 
 /* 링크 색상 */
-a { color: #3B6D11; }
-a:hover { color: #639922; }
+a { color: #534ab7; }
+a:hover { color: #3c3489; }
 
 /* 구분선 색상 */
 hr, .border-top {
-  border-color: #d0e8c0 !important;
+  border-color: #ede8db !important;
+}
+
+/* 홈 포스트 목록 카테고리 뱃지 */
+.cat-badge-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.cat-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #eeedfe;
+  color: #534ab7;
+  border: 1px solid #d4cfef;
+  line-height: 1.6;
+  white-space: nowrap;
 }

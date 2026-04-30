@@ -1,7 +1,7 @@
 ---
 title: "[Ch.3] 고전 Geostatistical 방법론"
-description: Geostatistical model의 구조부터 semivariogram 추정, kriging predictor까지 classical geostatistics의 전체 흐름을 정리한 노트이다.
-date: 2026-04-28 12:37:00 +0900
+description: Geostatistical model의 구조부터 semivariogram 추정, kriging predictor까지 classical geostatistics의 전체 흐름을 정리한 노트입니다.
+date: 2024-03-21 12:37:00 +0900
 categories: [Statistics, Spatial Statistics]
 tags: [geostatistics, semivariogram, kriging, spatial prediction, variogram]
 math: true
@@ -343,8 +343,8 @@ $$Y(B) \equiv \int_B Y(s)\,ds \Big/ |B|$$
 
 어려울 거 없이, 아까 point kriging 공식 구조는 그대로 살리되, 점과 점 사이를 구하던 행렬 항들을 '점과 블록', 혹은 '블록과 블록' 사이의 적분 평균값으로 싹 다 갈아 끼우면 끝입니다.
 
-- $\gamma\\_i = \gamma(B, s\\_i) = |B|^{-1} \int\\_B \gamma(u - s\\_i)\\, du$
-- $x\\_{0,j} = X\\_j(B) = |B|^{-1} \int\\_B X\\_j(u)\\, du$
+- $\gamma\\_i = \gamma(B, s\\_i) = \mid B\mid ^{-1} \int\\_B \gamma(u - s\\_i)\\, du$
+- $x\\_{0,j} = X\\_j(B) = \mid B\mid ^{-1} \int\\_B X\\_j(u)\\, du$
 
 흥미로운 사실은 블록 단위로 뭉쳐서 평균을 예측하다 보니 짜잘한 공간적 노이즈가 서로 상쇄되어 깎여나갑니다. 그래서 점 하나를 때려 맞추는 Point kriging보다 예측 분산(Kriging variance)이 훨씬 작고 안정적으로 떨어지는 기분 좋은 결과를 얻게 됩니다.
 

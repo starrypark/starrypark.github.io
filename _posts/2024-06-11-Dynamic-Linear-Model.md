@@ -1,9 +1,13 @@
 ---
 title: "Dynamic Linear Model (DLM) 기초: 정의부터 Filtering까지"
+description: West & Harrison(2006)을 바탕으로 DLM의 구조, 상태공간 표현, Bayesian Filtering(Kalman filter)의 흐름을 정리한 노트.
 date: 2024-06-11 12:26:00 +0900
 categories: [Time-Series Analysis, Bayesian Analysis]
 tags: [dynamic linear model, dlm, bayesian forecasting, time series, statistics]
+author: starrypark
+pin: false
 math: true
+mermaid: true
 ---
 
 이 포스팅은 West & Harrison(2006)의 저서 *Bayesian forecasting and dynamic models* 중 4장의 내용을 바탕으로, Dynamic Linear Model (DLM)의 기초적인 개념부터 Filtering까지의 흐름을 정리한 글입니다. 실제로 이 모델이 어떤 직관을 바탕으로 움직이는지에 초점을 맞춰 풀어보겠습니다.
@@ -49,7 +53,7 @@ $$
 \end{array}
 $$
 
-여기서 $\mathbf{m}\_0$와 $\mathbf{C}\_0$는 초기의 prior moment를 뜻합니다. 또한 누적된 정보 셋(information set)은 $D\_t = \\\{Y\_t, D\_\{t-1\}\\\}$ 처럼 과거부터 현재까지의 데이터를 재귀적으로 묶어 정의합니다.
+여기서 $\mathbf{m}\_0$와 $\mathbf{C}\_0$는 초기의 prior moment를 뜻합니다. 또한 누적된 정보 셋(information set)은 $D\_t = \\\{Y\_t, D\_\\{t-1\\}\\\}$ 처럼 과거부터 현재까지의 데이터를 재귀적으로 묶어 정의합니다.
 
 이제 Theorem 4.1을 통해 1-step 사후분포가 어떻게 순차적으로 업데이트되는지 따라가 보겠습니다.
 
@@ -66,7 +70,7 @@ $$
 $$
 \left(\mathbf{\theta}_t \mid D_{t-1}\right) \sim \mathrm{N}\left[\mathbf{a}_t, \mathbf{R}_t\right]
 $$
-이때 평균과 분산은 시스템 방정식을 따라 기댓값을 취한 결과인 $\mathbf{a}\_t = \mathbf{G}\_t \mathbf{m}\_\{t-1\}$, $\mathbf{R}\_t = \mathbf{G}\_t \mathbf{C}\_\{t-1\} \mathbf{G}\_t^{\prime} + \mathbf{W}\_t$ 로 계산됩니다.
+이때 평균과 분산은 시스템 방정식을 따라 기댓값을 취한 결과인 $\mathbf{a}\_t = \mathbf{G}\_t \mathbf{m}\_\\{t-1\\}$, $\mathbf{R}\_t = \mathbf{G}\_t \mathbf{C}\_\\{t-1\\} \mathbf{G}\_t^{\prime} + \mathbf{W}\_t$ 로 계산됩니다.
 
 3. **One-step forecast**: 앞서 예측한 상태를 이용해, 우리가 실제로 보게 될 관측치를 미리 예측합니다.
 $$
@@ -101,10 +105,10 @@ $$
 
 $0 \le j < k$를 만족하는 모든 $j$에 대하여, 현재 시점 $t$에서 미래를 내다보는 $k$-step 예측 분포와 공분산 구조는 다음과 같이 정리할 수 있습니다.
 
-- **(a) State distribution**: 미래 상태에 대한 예측입니다. $(\mathbf{\theta}\_\{t+k\} \mid D\_t) \sim \mathrm{N}[\mathbf{a}\_t(k), \mathbf{R}\_t(k)]$
-- **(b) Forecast distribution**: 미래 관측치에 대한 예측입니다. $(Y\_\{t+k\} \mid D\_t) \sim \mathrm{N}[f\_t(k), Q\_t(k)]$
-- **(c) State Covariance**: $\mathrm{C}[\mathbf{\theta}\_\{t+k\}, \mathbf{\theta}\_\{t+j\} \mid D\_t] = \mathbf{C}\_t(k, j)$
-- **(d) Obsn. Covariance**: $\mathrm{C}[Y\_\{t+k\}, Y\_\{t+j\} \mid D\_t] = \mathbf{F}\_\{t+k\}^{\prime} \mathbf{C}\_t(k, j) \mathbf{F}\_\{t+j\}$
+- **(a) State distribution**: 미래 상태에 대한 예측입니다. $(\mathbf{\theta}\_\\{t+k\\} \mid D\_t) \sim \mathrm{N}[\mathbf{a}\_t(k), \mathbf{R}\_t(k)]$
+- **(b) Forecast distribution**: 미래 관측치에 대한 예측입니다. $(Y\_\\{t+k\\} \mid D\_t) \sim \mathrm{N}[f\_t(k), Q\_t(k)]$
+- **(c) State Covariance**: $\mathrm{C}[\mathbf{\theta}\_\\{t+k\\}, \mathbf{\theta}\_\\{t+j\\} \mid D\_t] = \mathbf{C}\_t(k, j)$
+- **(d) Obsn. Covariance**: $\mathrm{C}[Y\_\\{t+k\\}, Y\_\\{t+j\\} \mid D\_t] = \mathbf{F}\_\\{t+k\\}^{\prime} \mathbf{C}\_t(k, j) \mathbf{F}\_\\{t+j\\}$
 - **(e) Other Covariance**: 관측치와 상태 사이의 교차 공분산입니다.
 $$
 \begin{aligned}
@@ -123,7 +127,7 @@ $$
 $$
 
 **증명의 흐름 (Proof Sketch)**
-행렬곱을 누적해서 계산하는 보조 도구 $\mathbf{H}\_\{t+k\}(r) = \mathbf{G}\_\{t+k\} \mathbf{G}\_\{t+k-1\} \ldots \mathbf{G}\_\{t+k-r+1\}$ 를 정의해 두면 증명이 편해집니다. 초기값을 $\mathbf{H}\_\{t+k\}(0) = \mathbf{I}$ 로 두고 시스템 방정식을 전개(unrolling)하면 다음과 같은 꼴을 얻습니다.
+행렬곱을 누적해서 계산하는 보조 도구 $\mathbf{H}\_\\{t+k\\}(r) = \mathbf{G}\_\\{t+k\\} \mathbf{G}\_\\{t+k-1\\} \ldots \mathbf{G}\_\\{t+k-r+1\\}$ 를 정의해 두면 증명이 편해집니다. 초기값을 $\mathbf{H}\_\\{t+k\\}(0) = \mathbf{I}$ 로 두고 시스템 방정식을 전개(unrolling)하면 다음과 같은 꼴을 얻습니다.
 
 $$
 \mathbf{\theta}_{t+k} = \mathbf{H}_{t+k}(k) \mathbf{\theta}_t + \sum_{r=1}^k \mathbf{H}_{t+k}(k-r) \mathbf{\omega}_{t+r}
@@ -133,19 +137,19 @@ $$
 
 ## 4.7 Filtering Recurrences
 
-새롭게 얻은 데이터를 바탕으로 모델을 앞만 향해 진행시키는 것이 아니라, 반대로 과거의 상태에 대한 추론을 다듬는 과정을 **Filtering(필터링)**이라고 합니다. 구체적으로 현재 시점 $t$의 정보를 바탕으로 한 과거 $t-k$ 시점의 분포 $(\mathbf{\theta}\_\{t-k\} \mid D\_t)$ ($k \ge 1$)를 **$k$-step filtered distribution**이라 부릅니다.
+새롭게 얻은 데이터를 바탕으로 모델을 앞만 향해 진행시키는 것이 아니라, 반대로 과거의 상태에 대한 추론을 다듬는 과정을 **Filtering(필터링)**이라고 합니다. 구체적으로 현재 시점 $t$의 정보를 바탕으로 한 과거 $t-k$ 시점의 분포 $(\mathbf{\theta}\_\\{t-k\\} \mid D\_t)$ ($k \ge 1$)를 **$k$-step filtered distribution**이라 부릅니다.
 
 ### Theorem 4.4.
 
-모든 시점 $t$에 대해 역방향 보정에 사용할 행렬 $\mathbf{B}\_t = \mathbf{C}\_t \mathbf{G}\_\{t+1\}^{\top} \mathbf{R}\_\{t+1\}^{-1}$ 를 정의해 보겠습니다. 그러면 $0 \le k < t$를 만족하는 모든 $k$에 대해 filtered marginal distribution은 다음과 같은 정규분포를 따릅니다.
+모든 시점 $t$에 대해 역방향 보정에 사용할 행렬 $\mathbf{B}\_t = \mathbf{C}\_t \mathbf{G}\_\\{t+1\\}^{\top} \mathbf{R}\_\\{t+1\\}^{-1}$ 를 정의해 보겠습니다. 그러면 $0 \le k < t$를 만족하는 모든 $k$에 대해 filtered marginal distribution은 다음과 같은 정규분포를 따릅니다.
 
 $$
 \left(\mathbf{\theta}_{t-k} \mid D_t\right) \sim \mathrm{N}\left[\mathbf{a}_t(-k), \mathbf{R}_t(-k)\right]
 $$
 
 이때 평균과 분산은 역방향(backward)으로 다음과 같이 업데이트됩니다.
-$\mathbf{a}\_t(-k) = \mathbf{m}\_\{t-k\} + \mathbf{B}\_\{t-k\}[\mathbf{a}\_t(-k+1) - \mathbf{a}\_\{t-k+1\}]$
-$\mathbf{R}\_t(-k) = \mathbf{C}\_\{t-k\} + \mathbf{B}\_\{t-k\}[\mathbf{R}\_t(-k+1) - \mathbf{R}\_\{t-k+1\}] \mathbf{B}\_\{t-k\}^{\top}$
+$\mathbf{a}\_t(-k) = \mathbf{m}\_\\{t-k\\} + \mathbf{B}\_\\{t-k\\}[\mathbf{a}\_t(-k+1) - \mathbf{a}\_\\{t-k+1\\}]$
+$\mathbf{R}\_t(-k) = \mathbf{C}\_\\{t-k\\} + \mathbf{B}\_\\{t-k\\}[\mathbf{R}\_t(-k+1) - \mathbf{R}\_\\{t-k+1\\}] \mathbf{B}\_\\{t-k\\}^{\top}$
 
 당연히 출발점이 되는 초기값은 $\mathbf{a}\_t(0) = \mathbf{m}\_t$, $\mathbf{R}\_t(0) = \mathbf{C}\_t$ 입니다.
 
@@ -159,7 +163,7 @@ p\left(\mathbf{\theta}_{t-k} \mid D_t\right) &= \int p\left(\mathbf{\theta}_{t-k
 \end{aligned}
 $$
 
-여기서 $k-1$ 스텝에서 식이 성립한다고 가정하면 뒤쪽의 확률은 이미 아는 값이 됩니다. 앞쪽 확률은 베이즈 정리를 적용해 풉니다. 미래의 관측치들 $\mathbf{Y} = \{Y\_\{t-k+1\}, \ldots, Y\_t\}$ 이 주어졌을 때 조건부 독립성 $\mathbf{Y} \perp \mathbf{\theta}\_\{t-k\} \mid \mathbf{\theta}\_\{t-k+1\}$ 을 이용해 복잡한 항들을 소거하면 식이 극적으로 단순해집니다.
+여기서 $k-1$ 스텝에서 식이 성립한다고 가정하면 뒤쪽의 확률은 이미 아는 값이 됩니다. 앞쪽 확률은 베이즈 정리를 적용해 풉니다. 미래의 관측치들 $\mathbf{Y} = \\{Y\_\\{t-k+1\\}, \ldots, Y\_t\\}$ 이 주어졌을 때 조건부 독립성 $\mathbf{Y} \perp \mathbf{\theta}\_\\{t-k\\} \mid \mathbf{\theta}\_\\{t-k+1\\}$ 을 이용해 복잡한 항들을 소거하면 식이 극적으로 단순해집니다.
 
 $$
 p\left(\mathbf{\theta}_{t-k} \mid \mathbf{\theta}_{t-k+1}, D_{t-k}\right) \propto p\left(\mathbf{\theta}_{t-k} \mid D_{t-k}\right) p\left(\mathbf{\theta}_{t-k+1} \mid \mathbf{\theta}_{t-k}, D_{t-k}\right)

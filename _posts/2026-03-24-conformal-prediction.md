@@ -5,7 +5,7 @@ author: starrypark
 date: 2026-03-24 00:00:00 +0810
 categories: [Statistics, Conformal Prediction]
 tags: [conformal prediction, prediction interval, quantile regression, split conformal, coverage]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---
@@ -52,7 +52,7 @@ $$\hat{q}_n = \text{Quantile}\!\left(1 - \alpha,\; \frac{1}{n}\sum_{i=1}^n \delt
 
 ## 핵심 아이디어: 순열 대칭성(Exchangeability)
 
-여기가 conformal prediction의 핵심입니다.
+여기가 conformal prediction의 핵심 아이디어입니다.
 
 $Y\_{n+1}$도 같은 분포에서 뽑혔으니, $Y\_1, \ldots, Y\_n, Y\_{n+1}$ 총 $n+1$개의 값에서 어떤 순열이든 똑같이 가능합니다.
 
@@ -106,7 +106,7 @@ $$P\left(Y_{n+1} \in \hat{C}_n(X_{n+1})\right) = P(Y_{n+1} \leq \hat{q}_n) \geq 
 
 여기서 $\hat{C}\_n(X\_{n+1}) = (-\infty, \hat{q}\_n]$입니다.
 
-**포인트:** 분위수 레벨을 $1-\alpha$가 아니라 $\frac{(n+1)(1-\alpha)}{n}$으로 올린 것이 핵심입니다. 이 작은 조정 하나가 유한 샘플 보장을 만들어냅니다.
+**포인트:** 분위수 레벨을 $1-\alpha$가 아니라 $\frac{(n+1)(1-\alpha)}{n}$으로 올린 것이 핵심입니다. 이 작은 조정 하나가 유한 샘플 coverage 보장을 만들어냅니다.
 
 ---
 
@@ -321,7 +321,7 @@ $$\hat{C}_n(x) = \left\{\pi_x(1),\ldots,\pi_x(k_x)\right\}$$
 
 $$R_i = \sum_{j=1}^{k_i} \hat{f}_{n_1}(X_i, \pi_i(j)) + \lambda (k_i - k_{\text{reg}})^+$$
 
-$k\_i > k\_{\text{reg}}$일 때 추가 비용을 부과합니다. 튜닝 파라미터 $\lambda > 0$와 $k\_{\text{reg}} \in \{2,\ldots,K\}$를 씁니다.
+$k\_i > k\_{\text{reg}}$일 때 추가 비용을 부과합니다. 튜닝 파라미터 $\lambda > 0$와 $k\_{\text{reg}} \in \\{2,\ldots,K\\}$를 씁니다.
 
 예측 집합:
 
@@ -377,7 +377,7 @@ Bayesian 예측 밀도를 점수로 씁니다:
 
 $$p(Y \mid X, \mathcal{Z}_{n+1}) = \int f_\theta(Y \mid X)\; \pi(\theta \mid \mathcal{Z}_{n+1})\; d\theta$$
 
-여기서 $\mathcal{Z}\_{n+1} = \{Z\_1, \ldots, Z\_{n+1}\}$이고, $\pi(\theta \mid \mathcal{Z}\_{n+1}) \propto \pi(\theta) \prod\_{i=1}^{n+1} f\_\theta(Y\_i \mid X\_i)$
+여기서 $\mathcal{Z}\_{n+1} = \\{Z\_1, \ldots, Z\_{n+1}\\}$이고, $\pi(\theta \mid \mathcal{Z}\_{n+1}) \propto \pi(\theta) \prod\_{i=1}^{n+1} f\_\theta(Y\_i \mid X\_i)$
 
 이 밀도는 $\mathcal{Z}\_{n+1}$의 순열에 **불변**합니다. 따라서 $R\_i = p(Y\_i \mid X\_i, \mathcal{Z}\_{n+1})$도 교환 가능합니다.
 

@@ -5,10 +5,9 @@ author: starrypark
 date: 2024-10-1 11:00:20 +0800
 categories: [Statistics, Survival Analysis]
 tags: [Survival Analysis, Statistics, 생존분석]
-pin: true
+pin: false
 math: true
 mermaid: true
-use_math: true
 ---
 
 
@@ -22,12 +21,12 @@ TBD (지각)
 
 ## Product Integral
 
-목표 : Nelson-Aalen Estimator와, Kaplan-Meier Estimatior의 관계를 알아본다.
+목표 : Nelson-Aalen Estimator와, Kaplan-Meier Estimatior의 관계를 알아본입니다.
 
 (1) $\alpha(t)=A^{\prime}(t)=-\frac{S^{\prime}(t)}{S(t)}$
-(2) $S(t)=\exp \{-A(t)\}$
+(2) $S(t)=\exp \\{-A(t)\\}$
 
-위에서 식 (1)은, 다음과 같이 일반화할수 있다.
+위에서 식 (1)은, 다음과 같이 일반화할수 있습니다.
 
 $$
 A(t)=-\int_0^t \frac{d S(u)}{S(u-)}
@@ -49,33 +48,33 @@ $$
 
 ## Survival Function의 Closedness
 
-증명의 Sketch만 고려해본다. $d S(t)=-S(t-) d A(t)$를 사용하면, 다음을 생각해 볼 수 있다.
+증명의 Sketch만 고려해본다. $d S(t)=-S(t-) d A(t)$를 사용하면, 다음을 생각해 볼 수 있습니다.
 
 $$
 d\left(S_1 / S_2\right)=\left\{\left(d S_1\right) S_2-S_1 d S_2\right\} / S_2^2=S_1 d\left(A_2-A_1\right) / S_2
 $$
 
-따라서 다음 식을 얻을 수 있다.
+따라서 다음 식을 얻을 수 있습니다.
 
 $$
 \frac{S_1(t)}{S_2(t)}=1+\int_0^t \frac{S_1(s-)}{S_2(s)} d\left(A_2-A_1\right)(s)
 $$
 
-이를 Duhamel의 방정식이라고 한다.
+이를 Duhamel의 방정식이라고 합니다.
 
 ## Kaplan-Meier Estimator
 
-Nelson-Aalen Estimator $\hat{A}(t)=\sum_{T_j \leq t} \frac{1}{Y\left(T_j\right)}$에서, 이것을 앞의 product Integral에 대입하면,
+Nelson-Aalen Estimator $\hat{A}(t)=\sum\_{T\_j \leq t} \frac{1}{Y\left(T\_j\right)}$에서, 이것을 앞의 product Integral에 대입하면,
 
 $$
 \hat{S}(t)=\prod_{0 \leq u \leq t}(1-d \hat{A}(t))=\prod_{u \leq t}(1-\Delta \hat{A}(t))=\prod_{T_j \leq t}\left(1-\frac{1}{Y\left(T_j\right)}\right)
 $$
 
-이 유도되며, 이것이 Kaplan-Meier Estimator이다.
+이 유도되며, 이것이 Kaplan-Meier Estimator입니다.
 
-직관적으로는, conditional probability들의 곱이다. (식 (1) 참고.)
+직관적으로는, conditional probability들의 곱입니다. (식 (1) 참고.)
 
-만약, Censoring이 없으면, KM estimator는, 다음과 같이, empirical cumulative distribution이 된다.
+만약, Censoring이 없으면, KM estimator는, 다음과 같이, empirical cumulative distribution이 됩니다.
 
 $$
 1-\hat{S}(t)=\frac{1}{n} \sum_{j=1}^n I\left(T_j \leq t\right)\left(=F_n\right)
@@ -93,9 +92,9 @@ $$
 S^*(t)=\prod_{0 \leq s \leq t}\left(1-dA^*(s)\right)=\exp \left\{-A^*(t)\right\} \approx S(t)
 $$
 
-여기서 '≈'는 시간 u ≤ t에서 위험 집합이 없을 확률이 매우 작을 때 성립한다.
+여기서 '≈'는 시간 u ≤ t에서 위험 집합이 없을 확률이 매우 작을 때 성립합니다.
 
-KM 추정량의 성질의 핵심은 다음과 같은 Duhamel 방정식이다.
+KM 추정량의 성질의 핵심은 다음과 같은 Duhamel 방정식입니다.
 
 $$
 \frac{\hat{S}(t)}{S^*(t)}-1=-\int_0^t \frac{\hat{S}(s-)}{S^*(s)} d\left(\hat{A}-A^*\right)(s) \approx-\left(\hat{A}(t)-A^*(t)\right)
@@ -107,24 +106,24 @@ $$
 \hat{S}(t) / S(t)-1 \approx-(\hat{A}(t)-A(t))
 $$
 
-따라서 다음과 같은 근사식을 얻을 수 있다.
+따라서 다음과 같은 근사식을 얻을 수 있습니다.
 
 $$
 \hat{S}(t)-S(t) \approx-S(t)(\hat{A}(t)-A(t))
 $$
 
-Nelson-Aalen의 Asymptotic에서 KM과의 관계 (특히, Delta Method를 이용한)를 이용하여 Asymptotic Normality도 보일 수 있다. (TBD)
+Nelson-Aalen의 Asymptotic에서 KM과의 관계 (특히, Delta Method를 이용한)를 이용하여 Asymptotic Normality도 보일 수 있습니다. (TBD)
 
 ## Median Survival Time
 
-Note. Survival은 Mean을 구하기가, 보통은 쉽지 않다.
+Note. Survival은 Mean을 구하기가, 보통은 쉽지 않습니다.
 
-survival distribution $F(t)=1-S(t)$의 p번째 fractile $\xi_p$는, $F(\xi_p)=p$ 혹은 $S(\xi_p) =1-p$가 되도록 정의된다.
+survival distribution $F(t)=1-S(t)$의 p번째 fractile $\xi\_p$는, $F(\xi\_p)=p$ 혹은 $S(\xi\_p) =1-p$가 되도록 정의됩니다.
 
-다만 KM estimator가 discrete한 성질을 지니기 때문에 이러한 $\xi_p$가 반드시 존재하리란 보장은 없다. 따라서,
+다만 KM estimator가 discrete한 성질을 지니기 때문에 이러한 $\xi\_p$가 반드시 존재하리란 보장은 없습니다. 따라서,
 
 $$
 \hat{\xi}_p=\inf \{t \mid \hat{S}(t) \leq 1-p\}
 $$
 
-로 대신 정의한다.
+로 대신 정의합니다.

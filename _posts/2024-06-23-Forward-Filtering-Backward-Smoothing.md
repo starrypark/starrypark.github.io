@@ -1,5 +1,6 @@
 ---
 title: "Dynamic Factor Model에서의 FFBS(Forward-Filtering, Backward Smoothing) 알고리즘 이해하기"
+description: Dynamic Factor Model에서 Latent Factor의 사후분포를 추출하는 FFBS 알고리즘의 직관과 수식 흐름을 정리한 노트.
 categories: [Data Science, Time Series]
 tags: [Statistics, Dynamic Factor Model, FFBS, MCMC, Bayesian, R]
 math: true
