@@ -1,0 +1,10 @@
+<header class="cafe-header">
+  <a class="cafe-brand" href="{{ '/' | relative_url }}">Starrypark<small>계속 배우는 사람의 서재</small></a>
+  <nav aria-label="주 메뉴">
+    {% assign destinations = '홈|/,공부|/study/,독서|/reading/,일상|/daily/' | split: ',' %}
+    {% for destination in destinations %}
+      {% assign item = destination | split: '|' %}
+      <a href="{{ item[1] | relative_url }}" {% if page.url == item[1] or page.layout == 'home' and forloop.first %}aria-current="page"{% endif %}>{{ item[0] }}</a>
+    {% endfor %}
+  </nav>
+</header>

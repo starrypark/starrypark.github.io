@@ -7,6 +7,7 @@
     flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
   "
 >
+  <nav class="cafe-footer-nav" aria-label="보조 메뉴"><a href="{{ '/about/' | relative_url }}">소개</a><a href="{{ '/archives/' | relative_url }}">전체 기록</a><a href="{{ '/categories/' | relative_url }}">주제별 보기</a><a href="{{ '/tags/' | relative_url }}">태그</a><a href="https://github.com/{{ site.github.username }}">GitHub</a></nav>
   <p>
     {{- '©' }}
     <time>{{ 'now' | date: '%Y' }}</time>

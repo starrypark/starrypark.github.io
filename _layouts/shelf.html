@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<div id="cafe-library">
+  {% include cafe-hero.html %}
+  <div class="cafe-columns">
+    <section aria-label="글 목록">
+      {% if page.shelf == 'study' %}
+        <nav class="topics" aria-label="공부 주제">
+          <a href="{{ '/categories/' | relative_url }}">주제별로 찾아보기 ↗</a>
+          <a href="{{ '/tags/' | relative_url }}">태그로 찾아보기 ↗</a>
+        </nav>
+      {% endif %}
+      <div class="section-head"><h2>{{ page.title }} 기록</h2><span>천천히 쌓아가는 중</span></div>
+      {% assign shown = 0 %}
+      {% for post in site.posts %}
+        {% assign shelf = post.shelf | default: 'study' %}
+        {% if shelf == page.shelf and post.hidden != true %}
+          {% include cafe-post-card.html post=post %}
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      {% if shown == 0 %}<div class="cafe-empty"><h3>아직은 빈 책장입니다.</h3><p>{{ page.empty_message }}</p></div>{% endif %}
+    </section>
+    {% include cafe-note.html %}
+  </div>
+</div>

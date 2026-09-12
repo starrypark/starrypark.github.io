@@ -1,0 +1,5 @@
+<aside aria-label="서재 안내"><div class="note"><h3>이 서재에는</h3><p>통계와 데이터에 대한 공부,<br>책에서 이어진 생각,<br>그냥 기억하고 싶은 하루.</p><p>길고 짧은 기록을<br>함께 놓아둡니다.</p></div><div class="shelf"><h3>다시 꺼내 읽는 글</h3>
+{% assign featured = site.posts | where: 'pin', true | where_exp: 'post', 'post.hidden != true' %}
+{% if featured.size == 0 %}{% assign featured = site.posts | where_exp: 'post', 'post.hidden != true' | reverse %}{% endif %}
+{% for post in featured limit: 2 %}<p><a href="{{ post.url | relative_url }}">{{ post.title }}</a></p>{% endfor %}
+</div></aside>

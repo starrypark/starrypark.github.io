@@ -1,0 +1,14 @@
+<section class="hero">
+  <div>
+    <div class="eyebrow">{{ page.eyebrow | default: 'A QUIET CORNER OF MY DAYS' }}</div>
+    <h1>{{ page.hero_title | default: '배우고 읽고,<br>살아가며 남기는 기록.' }}</h1>
+    <p>{{ page.hero_description | default: '통계와 데이터, 책과 일상의 작은 발견들.<br>궁금한 것을 펼쳐두고 천천히 쌓아갑니다.' }}</p>
+    <span class="signature">A little curiosity, every day.</span>
+  </div>
+  <div class="still" aria-hidden="true"><div class="arch"></div><div class="book b-one"><small>STARRYPARK’S LIBRARY</small><strong>배움의<br>기록</strong><span>STATISTICS & DATA</span></div><div class="book b-two"><small>NOTES ON LIVING</small><strong>책과<br>생활 사이</strong><span>READ · THINK · LIVE</span></div><div class="memo">오늘도 한 페이지.<br><i class="fas fa-mug-hot"></i></div><div class="seal">천천히<br>차곡차곡</div></div>
+</section>
+<nav class="doorways" aria-label="서재 둘러보기">
+  <a href="{{ '/study/' | relative_url }}"><span>01 / LEARN</span><strong>궁금함을 펼치는 곳 ↗</strong><small>통계 · 데이터 사이언스 · AI · 금융</small></a>
+  <a href="{{ '/reading/' | relative_url }}"><span>02 / READ</span><strong>책 너머의 생각 ↗</strong><small>읽은 문장과 오래 남는 질문</small></a>
+  <a href="{{ '/daily/' | relative_url }}"><span>03 / LIVE</span><strong>하루의 작은 조각 ↗</strong><small>일기 · 취향 · 그냥 좋았던 순간</small></a>
+</nav>
