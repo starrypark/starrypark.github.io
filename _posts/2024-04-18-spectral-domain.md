@@ -3,11 +3,14 @@ title: "[Ch.5] 공간 통계의 Spectral Domain 분석"
 description: Spatial process를 주파수 영역에서 분석하는 방법, spectral representation, periodogram, Whittle likelihood까지 정리한 노트입니다.
 author: starrypark
 date: 2024-04-18 00:00:00 +0810
-categories: [Statistics, Spatial Statistics]
+categories: [통계, 공간통계]
 tags: [spectral analysis, periodogram, fourier transform, matern, geostatistics]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: spatial
+series_order: 4
 ---
 
 ## 개요

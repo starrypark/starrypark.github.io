@@ -3,11 +3,14 @@ title: "[Ch.4] Likelihood 기반 추정법"
 description: Geostatistical model에서 ML/REML 추정, 점근 이론, 모델 비교, 계산 효율화 방법까지 likelihood 기반 접근법을 정리한 노트입니다.
 author: starrypark
 date: 2024-04-04 00:00:00 +0810
-categories: [Statistics, Spatial Statistics]
-tags: [maximum likelihood, REML, kriging, geostatistics, likelihood]
+categories: [통계, 공간통계]
+tags: [maximum likelihood, reml, kriging, geostatistics, likelihood]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: spatial
+series_order: 3
 ---
 
 ## 개요

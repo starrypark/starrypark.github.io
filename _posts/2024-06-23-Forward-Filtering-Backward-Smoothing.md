@@ -1,10 +1,11 @@
 ---
 title: "Dynamic Factor Model에서의 FFBS(Forward-Filtering, Backward Smoothing) 알고리즘 이해하기"
 description: Dynamic Factor Model에서 Latent Factor의 사후분포를 추출하는 FFBS 알고리즘의 직관과 수식 흐름을 정리한 노트.
-categories: [Data Science, Time Series]
-tags: [Statistics, Dynamic Factor Model, FFBS, MCMC, Bayesian, R]
+categories: [통계, 시계열]
+tags: [statistics, dynamic factor model, ffbs, mcmc, bayesian, r]
 math: true
 date: 2024-06-23 12:43:00 +0900
+shelf: study
 ---
 
 거시경제 지표나 금융 데이터를 다루다 보면, 수십에서 수백 개에 달하는 시계열 변수들이 같이 움직이는 현상을 자주 보게 됩니다. 이 거대한 데이터 속에 숨겨진 몇 개의 핵심 동인(Driver)을 뽑아내는 방법론이 바로 Dynamic Factor Model (DFM)입니다.

@@ -57,6 +57,11 @@
     {% assign _left = _img_snippet | split: '>' | first %}
     {% assign _right = _img_snippet | remove: _left %}
 
+    {% if _left contains 'class="shelf-hero-image"' %}
+      {% assign _img_content = _img_content | append: IMG_TAG | append: _img_snippet %}
+      {% continue %}
+    {% endif %}
+
     {% unless _left contains 'src=' %}
       {% continue %}
     {% endunless %}

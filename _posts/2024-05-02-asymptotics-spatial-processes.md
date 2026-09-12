@@ -3,11 +3,14 @@ title: "[Ch.6] 공간 과정의 점근 이론"
 description: Spatial process의 점근 이론, probability measure의 equivalence와 orthogonality, kriging의 점근적 최적성까지 정리한 노트입니다.
 author: starrypark
 date: 2024-05-02 00:00:00 +0810
-categories: [Statistics, Spatial Statistics]
+categories: [통계, 공간통계]
 tags: [asymptotics, kriging, gaussian process, infill asymptotics, equivalence]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: spatial
+series_order: 5
 ---
 
 ## 개요

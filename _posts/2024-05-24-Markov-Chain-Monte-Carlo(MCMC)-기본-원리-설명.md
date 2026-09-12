@@ -3,11 +3,12 @@ title: MarkovChain Monte Carlo(MCMC) 기본 원리 설명
 description: Dynamic Linear model의 기본적인 개념과 분포 개념 설명
 author: starrypark
 date: 2024-05-24 13:22:34 +0810
-categories: [Statistics,Bayesian Analysis]
-tags: [Statistics, MCMC, Bayesinan]
+categories: [통계, 베이지안 추론]
+tags: [statistics, mcmc, bayesinan]
 pin: false
 math: true
 mermaid: true
+shelf: study
 ---
 
 ## 개요

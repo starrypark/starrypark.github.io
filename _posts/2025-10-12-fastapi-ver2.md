@@ -2,11 +2,14 @@
 title: "FastAPI (2): async/await와 파일 업로드 처리"
 author: starrypark
 date: 2025-10-12 00:00:00 +0900
-categories: [Computer Science, Backend, FastAPI]
-tags: [FastAPI, Python, async, await, UploadFile, HTTPException, Backend]
+categories: [개발, 백엔드]
+tags: [fastapi, python, async, await, uploadfile, httpexception, backend]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: fastapi
+series_order: 2
 ---
 
 지난 포스팅에서 FastAPI의 기본 라우팅을 다뤘습니다. 이번엔 FastAPI가 "빠르다"고 불리는 진짜 이유 — **비동기 처리**를 먼저 이해하고, 실제 서비스에서 자주 쓰이는 **파일 업로드**와 **에러 핸들링**까지 살펴봅니다.

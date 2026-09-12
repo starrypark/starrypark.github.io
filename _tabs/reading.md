@@ -3,6 +3,9 @@ layout: shelf
 title: 독서
 permalink: /reading/
 shelf: reading
+order: 6
+hero_image: /assets/img/shelves/reading.jpg
+hero_image_alt: 창가에 펼쳐 놓은 책과 머그잔
 eyebrow: READING NOTES
 hero_title: '책장을 넘기고,<br>생각을 이어갑니다.'
 hero_description: 마음에 남은 문장과 책에서 시작된 생각들.

@@ -2,12 +2,13 @@
 title: "Dynamic Linear Model (DLM) 기초: 정의부터 Filtering까지"
 description: West & Harrison(2006)을 바탕으로 DLM의 구조, 상태공간 표현, Bayesian Filtering(Kalman filter)의 흐름을 정리한 노트.
 date: 2024-06-11 12:26:00 +0900
-categories: [Time-Series Analysis, Bayesian Analysis]
+categories: [통계, 시계열]
 tags: [dynamic linear model, dlm, bayesian forecasting, time series, statistics]
 author: starrypark
 pin: false
 math: true
 mermaid: true
+shelf: study
 ---
 
 이 포스팅은 West & Harrison(2006)의 저서 *Bayesian forecasting and dynamic models* 중 4장의 내용을 바탕으로, Dynamic Linear Model (DLM)의 기초적인 개념부터 Filtering까지의 흐름을 정리한 글입니다. 실제로 이 모델이 어떤 직관을 바탕으로 움직이는지에 초점을 맞춰 풀어보겠습니다.

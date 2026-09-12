@@ -1,0 +1,24 @@
+<section class="study-guide" aria-labelledby="study-topics-title">
+  <h2 id="study-topics-title">주제별로 펼쳐보기</h2>
+  <div class="study-topic-grid">
+    {% for topic in site.data.study-topics %}
+      <div class="study-topic">
+        <h3>{{ topic.name }}</h3>
+        <ul>
+          {% for name in topic.children %}
+            {% assign topic_posts = site.categories[name] | where_exp: 'post', 'post.hidden != true' %}
+            {% capture topic_url %}/categories/{{ name | slugify | url_encode }}/{% endcapture %}
+            <li><a href="{{ topic_url | relative_url }}">{{ name }}</a><span>{{ topic_posts.size }}편</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="section-head"><h2>순서대로 읽는 연재</h2><a href="{{ '/series/' | relative_url }}">전체 목차 ↗</a></div>
+  <div class="study-series-grid">
+    {% for series in site.data.series %}
+      {% assign entries = site.posts | where: 'series', series.id | where_exp: 'post', 'post.hidden != true' | sort: 'series_order' %}
+      <a href="{{ '/series/' | relative_url }}#{{ series.id }}"><strong>{{ series.title }}</strong><span>{{ entries.size }}편 · {{ series.description }}</span></a>
+    {% endfor %}
+  </div>
+</section>

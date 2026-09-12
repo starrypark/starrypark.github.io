@@ -3,11 +3,14 @@ title: "LangGraph 입문: 처음 챗봇을 짤 때 반드시 알아야 할 것�
 description: LangGraph의 핵심 구성 요소인 State, Node, Edge부터 Checkpointer, ToolNode까지 — 처음 챗봇을 만들 때 알아야 할 내용을 처음부터 차근차근 정리한 노트.
 author: starrypark
 date: 2025-12-14 00:00:00 +0900
-categories: [AI Engineering, LLM]
-tags: [LangGraph, LangChain, Chatbot, Agent, StateGraph, Python, AI]
+categories: [AI, LLM 애플리케이션]
+tags: [langgraph, langchain, chatbot, agent, stategraph, python, ai]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: langgraph
+series_order: 1
 ---
 
 저는 처음에 Langchain으로 챗봇을 구축했습니다. 근데 막상 챗봇에 조건 분기를 넣거나, 메모리를 붙이거나, 툴 호출 흐름을 제어하려고 하면 한계가 생기기 시작합니다.

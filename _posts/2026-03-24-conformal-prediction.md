@@ -3,11 +3,14 @@ title: "Conformal Prediction: 유한 샘플에서 보장되는 예측 구간"
 description: Conformal prediction의 핵심 아이디어와 수학적 유도를 처음부터 차근차근 정리한 노트.
 author: starrypark
 date: 2026-03-24 00:00:00 +0810
-categories: [Statistics, Conformal Prediction]
+categories: [통계, 불확실성 정량화]
 tags: [conformal prediction, prediction interval, quantile regression, split conformal, coverage]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: uq
+series_order: 4
 ---
 
 ## 개요

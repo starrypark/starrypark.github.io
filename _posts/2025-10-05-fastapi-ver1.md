@@ -2,11 +2,14 @@
 title: "FastAPI (1): 라우팅과 엔드포인트 기초"
 author: starrypark
 date: 2025-10-05 00:00:00 +0900
-categories: [Computer Science, Backend, FastAPI]
-tags: [FastAPI, Python, REST API, HTTP, Backend, Web]
+categories: [개발, 백엔드]
+tags: [fastapi, python, rest api, http, backend, web]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: fastapi
+series_order: 1
 ---
 
 ## 개요

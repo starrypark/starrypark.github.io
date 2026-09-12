@@ -6,6 +6,7 @@ layout: default
   <div class="cafe-columns">
     <section aria-label="글 목록">
       {% if page.shelf == 'study' %}
+        {% include study-guide.html %}
         <nav class="topics" aria-label="공부 주제">
           <a href="{{ '/categories/' | relative_url }}">주제별로 찾아보기 ↗</a>
           <a href="{{ '/tags/' | relative_url }}">태그로 찾아보기 ↗</a>

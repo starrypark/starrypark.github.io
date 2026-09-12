@@ -7,4 +7,5 @@
       <a href="{{ item[1] | relative_url }}" {% if page.url == item[1] or page.layout == 'home' and forloop.first %}aria-current="page"{% endif %}>{{ item[0] }}</a>
     {% endfor %}
   </nav>
+  <a class="cafe-about-link" href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}aria-current="page"{% endif %}>About</a>
 </header>

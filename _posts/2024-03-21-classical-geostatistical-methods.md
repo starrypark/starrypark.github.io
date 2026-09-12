@@ -2,9 +2,12 @@
 title: "[Ch.3] 고전 Geostatistical 방법론"
 description: Geostatistical model의 구조부터 semivariogram 추정, kriging predictor까지 classical geostatistics의 전체 흐름을 정리한 노트입니다.
 date: 2024-03-21 12:37:00 +0900
-categories: [Statistics, Spatial Statistics]
+categories: [통계, 공간통계]
 tags: [geostatistics, semivariogram, kriging, spatial prediction, variogram]
 math: true
+shelf: study
+series: spatial
+series_order: 2
 ---
 
 ## 개요

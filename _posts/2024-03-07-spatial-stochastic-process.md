@@ -2,9 +2,12 @@
 title: "[Ch.2] 공간 확률 과정 이론"
 description: Spatial stochastic process의 기본 개념부터 covariance function, kriging predictor까지 정리한 노트입니다.
 date: 2024-03-07 12:35:00 +0900
-categories: [Statistics, Spatial Statistics]
+categories: [통계, 공간통계]
 tags: [spatial statistics, stochastic process, covariance function, kriging, geostatistics]
 math: true
+shelf: study
+series: spatial
+series_order: 1
 ---
 
 ## 개요

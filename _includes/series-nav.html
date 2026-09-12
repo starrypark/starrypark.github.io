@@ -1,0 +1,13 @@
+{% if page.series %}
+  {% assign series_posts = site.posts | where: 'series', page.series | where_exp: 'post', 'post.hidden != true' | sort: 'series_order' %}
+  {% for entry in series_posts %}
+    {% if entry.url == page.url %}
+      {% assign previous_index = forloop.index0 | minus: 1 %}
+      {% assign next_index = forloop.index0 | plus: 1 %}
+      <nav class="series-navigation" aria-label="연재 이전 다음 글">
+        {% if forloop.first == false %}<a href="{{ series_posts[previous_index].url | relative_url }}"><small>← 연재 이전 글</small>{{ series_posts[previous_index].title }}</a>{% endif %}
+        {% if forloop.last == false %}<a href="{{ series_posts[next_index].url | relative_url }}"><small>연재 다음 글 →</small>{{ series_posts[next_index].title }}</a>{% endif %}
+      </nav>
+    {% endif %}
+  {% endfor %}
+{% endif %}

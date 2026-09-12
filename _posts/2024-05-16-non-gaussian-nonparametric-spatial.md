@@ -3,11 +3,14 @@ title: "[Ch.11] Non-Gaussian 및 비모수 공간 모델"
 description: Gaussian 가정을 넘어서 GLG mixture model, Dirichlet process, spatial stick-breaking prior까지 non-Gaussian spatial modeling을 정리한 노트입니다.
 author: starrypark
 date: 2024-05-16 00:00:00 +0810
-categories: [Statistics, Spatial Statistics]
+categories: [통계, 공간통계]
 tags: [non-gaussian, dirichlet process, spatial statistics, bayesian nonparametrics, kriging]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: spatial
+series_order: 6
 ---
 
 ## 개요

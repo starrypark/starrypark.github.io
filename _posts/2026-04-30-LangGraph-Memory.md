@@ -3,10 +3,13 @@ title: "LangGraph에서 기억력 구현하기: MemorySaver, Checkpointing, 그�
 description: LangGraph가 상태를 저장하고 이어받는 방식을 밑바닥부터 정리한 노트. MemorySaver, 히스토리 누적 패턴, thread_id 세션 분리, 영구 저장소 교체까지 다룹니다.
 author: starrypark
 date: 2026-04-30 09:00:00 +0900
-categories: [AI, LangGraph]
+categories: [AI, LLM 애플리케이션]
 tags: [langgraph, llm, memory, checkpointing, chatbot, python, langchain]
 math: true
 mermaid: true
+shelf: study
+series: langgraph
+series_order: 2
 ---
 
 ## 개요

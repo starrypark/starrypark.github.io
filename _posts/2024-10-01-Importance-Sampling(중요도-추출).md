@@ -3,11 +3,12 @@ title: 중요도 추출(Importance Sampling)
 description: 중요도 추출의 기본적인 개념 정리
 author: starrypark
 date: 2024-10-01 10:00:20 +0800
-categories: [Statistics, Bayesian Analysis]
-tags: [Statistics, Importance Sampling]
+categories: [통계, 베이지안 추론]
+tags: [statistics, importance sampling]
 pin: false
 math: true
 mermaid: true
+shelf: study
 ---
 
 ## Purpose

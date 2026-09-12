@@ -1,13 +1,14 @@
 ---
 title: "생존분석에서 Competing Risk 다루기: CSH와 Fine-Gray 모델의 진짜 차이"
 description: Cause-Specific Hazard와 Fine-Gray(Subdistribution Hazard) 모델의 차이, CIF의 개념, 그리고 실무에서 어떤 모델을 선택해야 하는지 정리한 노트.
-categories: [Data Science, Survival Analysis]
-tags: [Statistics, Competing Risk, Fine-Gray, Cause-Specific Hazard, CIF, Biostatistics]
+categories: [통계, 생존분석]
+tags: [statistics, competing risk, fine-gray, cause-specific hazard, cif, biostatistics]
 author: starrypark
 pin: false
 math: true
 mermaid: true
 date: 2025-12-15 12:47:00 +0900
+shelf: study
 ---
 
 생존분석(Survival Analysis)을 실제 임상 데이터나 비즈니스 데이터에 적용하다 보면 '경쟁 위험(Competing Risk)'이라는 까다로운 장벽에 부딪히게 됩니다.

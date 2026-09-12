@@ -1,0 +1,12 @@
+- id: spatial
+  title: 공간통계 학습 노트
+  description: 공간 확률 과정부터 비모수 모델까지, 챕터 순서대로 읽는 노트.
+- id: uq
+  title: 불확실성 정량화 이해하기
+  description: 통계적 기초와 Bayesian UQ, 딥러닝, Conformal Prediction으로 이어집니다.
+- id: fastapi
+  title: FastAPI 기초
+  description: 라우팅부터 비동기 처리와 서버 구조까지.
+- id: langgraph
+  title: LangGraph로 챗봇 만들기
+  description: 그래프의 기본 구성에서 대화 메모리까지.

@@ -1,0 +1,6 @@
+- name: 통계
+  children: [공간통계, 베이지안 추론, 시계열, 생존분석, 불확실성 정량화]
+- name: 개발
+  children: [백엔드, 개발환경·배포]
+- name: AI
+  children: [LLM 애플리케이션]

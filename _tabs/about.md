@@ -1,133 +1,102 @@
 ---
-# the default layout is 'page'
+layout: page
+title: About
+permalink: /about/
 icon: fas fa-info-circle
 order: 1
 ---
 
-📧 starrypark@snu.ac.kr · 🔗 https://starrypark.github.io · 🐙 https://github.com/starrypark
+## 박재민 · Jae Min Park
 
-## About Me
+탄탄한 수학과 통계학 기반으로 다양한 분야에서 데이터를 분석한 경험이 있는 데이터 사이언티스트입니다.
+현재 금융업에서 데이터 분석 업무를 하고 있지만, 데이터 분석 및 통계 전반에 관심이 많습니다.
 
-I am a data scientist with a strong foundation in mathematics and statistics, specializing in survival analysis, medical AI, and uncertainty quantification for large language models.  
-My work focuses on extracting reliable insights from complex data and building models with clear, quantitative justification. I enjoy understanding unfamiliar domains quickly and applying statistical and machine learning methods to real problems in healthcare and beyond.
+과거에 제가 공부했던 의료 데이터 분석 경험과 지식들, AI 지식들 뿐만 아니라, 현재 금융 관련 기록이나
+회사 업무와 관련 없는 A/B Test, 온라인 실험 원리 및 유의사항 등 다양한 분야의 데이터 분석이나 통계학을 정리할 계획입니다.
 
-I have research and project experience across survival modeling, medical LLM evaluation, wearable time-series analysis, Bayesian statistics, and spatio-temporal modeling.
+또한 데이터 분석을 넘어 생활에서, 책을 통해 얻은 다양한 인사이트 역시 정리하려고 합니다. 
+이곳은 그렇게 배우고 읽고 살아가며 남기는 기록을 모은 서재입니다.
 
----
 
-## Experience
+## 이 서재에 남기는 기록
 
-### National Cancer Center — Statistical/Data Science Researcher  
-*Jul 2025 – Present*  
-- Research on survival analysis and medical AI models using real-world EMR cancer data  
-- Development of AI-assisted survival modeling and EMR-based automated report generation agents  
-- Uncertainty Quantification (UQ) for large language models  
-- Evaluation and benchmarking of medical LLMs and clinical chatbots
+[공부]({{ '/study/' | relative_url }})에는 데이터 분석, 통계, AI, 개발 등 다양한 분야에서 제가 공부했던 것, 기억하고 싶은 것들을 분석하여 적습니다. 
+[독서]({{ '/reading/' | relative_url }})에는 책을 읽으며 그날 얻은 인사이트를 적습니다.
+[일상]({{ '/daily/' | relative_url }})에는 정리하고 싶은 하루의 특별한 일상을 담습니다.
 
-### LG CNS — Data Science Intern  
-*Jan 2024 – Feb 2024*  
-- Participated in generative AI service development  
-- Studied and implemented various fine-tuning methods for LLMs  
-- Built fine-tuning pipelines using Python and PyTorch  
-- Compared performance, efficiency, and cost across tuning strategies
+## 지나온 길
 
----
+### 경력
 
-## Education
+**롯데캐피탈 - 신용분석**
 
-**M.S. in Statistics, Seoul National University**  
-2023.09 – 2025.08 · GPA 3.98/4.3
+2026.06-
 
-**B.S. in Mathematics (Minor in Statistics), Korea University**  
-2016.03 – 2023.02 · GPA 3.8/4.5
+- 채권 추심 및 연체 관련 데이터 산출 및 보고서 작성
+- 채권모형 분석, 모니터링
+- 채무조정 및 추심불가채권, 고객 데이터 분석
 
----
+**국립암센터 - 통계 및 데이터 사이언스 연구원**
 
-## Research Interests
+2025.07-2026.06
 
-- Survival Analysis  
-- Uncertainty Quantification in LLMs  
-- Medical LLM / Medical AI  
-- Wearable Device Time-Series  
-- Bayesian Statistics  
-- Factor Analysis  
-- Spatio-Temporal Statistics  
+- EMR 암 환자 데이터를 활용한 생존분석과 의료 AI 연구
+- AI 기반 생존모형 분석 및 EMR 보고서 자동화 에이전트 개발
+- LLM의 불확실성 정량화와 의료 챗봇 평가
 
----
+**LG CNS · Data Scicence 인턴**
+
+2024.01–2024.02
+
+- 생성형 AI 서비스 개발 참여
+- Python과 PyTorch 기반 LLM 파인튜닝 파이프라인 구축
+- 파인튜닝 방식별 성능·효율·비용 비교
+
+### 학력
+
+- **서울대학교 통계학 석사** · 2023.09–2025.08
+- **고려대학교 수학 학사 · 통계학 부전공** · 2016.03–2023.02
+
+## 프로젝트
+
+**웨어러블 데이터의 시공간 분석**
+
+한국연구재단 석사과정생 연구장려금 지원 연구 · 2024–2025
+
+**Jane Street 실시간 시장 데이터 예측 · Kaggle**
+
+2024.12–2025.01 · 익명화된 금융 데이터의 구조를 통계적으로 탐색하고, 파생변수를 생성하여 예측모형 개발
+
+**HD 현대 AI Challenge · Dacon**
+
+2023.09–2023.11 · 선박 접안 시간 예측을 위한 전처리, 변수 설계와 ML 모델링
+
+[프로젝트 코드](https://github.com/starrypark/HD-AI-Challenge)
+
+**서울 지하철 승객 흐름 분석**
+
+2021.09–2021.11 · ARIMA 모델을 이용한 영등포시장역 지하철 승하차량 패턴 분석
+
+**KBO 팀 승률 회귀분석**
+
+2017.09–2017.11 · 타격·투구 지표의 관계와 다중공선성 분석
 
 ## Skills
 
-- **Languages:** Python, R, SQL, MATLAB, SAS  
-- **Data Analysis:** Pandas, NumPy, Statsmodels, Tidyverse  
-- **ML/DL:** Scikit-learn, PyTorch, TensorFlow  
-- **Visualization:** Matplotlib, Seaborn, ggplot2  
-- **Tools:** Git, GitHub  
+- **언어:** Python, R, SQL, MATLAB, SAS
+- **분석·모델링:** Pandas, NumPy, Statsmodels, Tidyverse, Scikit-learn, PyTorch, TensorFlow
+- **시각화:** Matplotlib, Seaborn, ggplot2
+- **협업:** Git, GitHub
 
----
+## 교육과 장학
 
-## Projects
+- 서울대학교 강의 조교: 통계학(2025-1), 주제탐구세미나(2024-2) 등
+- 한국연구재단 석사과정생 연구장려금 · 2024–2025
+- 국가우수장학금(이공계) · 2016–2018
+- 고려대학교 신입생 성적우수 장학금 · 2016
 
-### Jane Street Real-Time Market Data Forecasting (Kaggle)  
-*Dec 2024 – Jan 2025*  
-- Developed predictive models using anonymized real-time market data  
-- Analyzed statistical structures and extracted informative features from domain-removed datasets
+## Contact
 
-### HD Hyundai AI Challenge (Dacon)  
-*Sep 2023 – Nov 2023*  
-- Built ML models for ship berthing time prediction  
-- Designed preprocessing and feature engineering strategies for complex structured data  
-Repo: https://github.com/starrypark/HD-AI-Challenge
+블로그를 읽으시고, 저에게 하고 싶은 이야기는 아래로 보내주세요.
 
-### Time-Series Analysis Project — Seoul Metro Passenger Flow  
-*Sep 2021 – Nov 2021*  
-- Analyzed passenger patterns at Yeongdeungpo Market Station  
-- Applied findings to optimize daily schedule decisions
-
-### Regression Analysis Project — KBO Team Win Rate Modeling  
-*Sep 2017 – Nov 2017*  
-- Built models using batting and pitching indicators  
-- Investigated multicollinearity and identified key performance metrics
-
----
-
-## Teaching Experience
-
-- Teaching Assistant — Statistics (2025-1)  
-- Teaching Assistant — Seminar on Statistical Exploration (2024-2)  
-- Teaching Assistant — Introduction to Convergence Data Science (2024-2)
-
----
-
-## Awards & Scholarships
-
-- **Graduate Student Research Fellowship**, National Research Foundation of Korea (2024–2025)  
-  - Research topic: *Spatio-Temporal Analysis for Wearable Device Data*  
-  - Funding: 12M KRW per year  
-- **National Science and Engineering Scholarship** (2016–2018)  
-- **KU Freshman Academic Excellence Scholarship** (2016)
-
----
-
-## Languages
-
-- Korean: Native  
-- English: Intermediate-High (OPIc IH)
-
-
-
-<!--
-**starrypark/starrypark** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
-
-
+[이메일](mailto:jaeminbag12@gmail.com) · [GitHub](https://github.com/starrypark)

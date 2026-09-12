@@ -3,11 +3,14 @@ title: "FastAPI (3): CORS, Middleware, 그리고 서버 구조"
 
 author: starrypark
 date: 2025-10-19 00:00:00 +0900
-categories: [Computer Science, Backend, FastAPI]
-tags: [FastAPI, Python, CORS, Middleware, Jinja2, Session, Backend]
+categories: [개발, 백엔드]
+tags: [fastapi, python, cors, middleware, jinja2, session, backend]
 pin: false
 math: true
 mermaid: true
+shelf: study
+series: fastapi
+series_order: 3
 ---
 
 지금까지 엔드포인트를 만들고, 파일을 받아 처리하는 방법을 다뤘습니다. 이번엔 실제 서비스를 만드는 과정에서 마주치는 문제들을 다룹니다 — **CORS**, **Middleware**, **정적 파일 서빙**, **템플릿 렌더링**, **세션 관리**입니다.

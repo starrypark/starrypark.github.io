@@ -1,0 +1,12 @@
+{% if page.series %}
+  {% assign series_info = site.data.series | where: 'id', page.series | first %}
+  {% assign series_posts = site.posts | where: 'series', page.series | where_exp: 'post', 'post.hidden != true' | sort: 'series_order' %}
+  <nav class="series-toc" aria-label="연재 목차">
+    <p><a href="{{ '/series/' | relative_url }}#{{ page.series }}">{{ series_info.title }}</a> · 전체 {{ series_posts.size }}편</p>
+    <ol>
+      {% for entry in series_posts %}
+        <li>{% if entry.url == page.url %}<strong aria-current="page">{{ entry.title }} <small>← 읽는 중</small></strong>{% else %}<a href="{{ entry.url | relative_url }}">{{ entry.title }}</a>{% endif %}</li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

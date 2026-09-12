@@ -3,11 +3,12 @@ title: Kaplan-Meier Estimator(카플란-마이어 추정량)
 description: Survival Analysis에서, 가장 널리 쓰이며 중요한 추정량인 Kaplan-Meier 추정량에 대해 Counting Process의 관점에서 유도해 본다.
 author: starrypark
 date: 2024-10-1 11:00:20 +0800
-categories: [Statistics, Survival Analysis]
-tags: [Survival Analysis, Statistics, 생존분석]
+categories: [통계, 생존분석]
+tags: [survival analysis, statistics, 생존분석]
 pin: false
 math: true
 mermaid: true
+shelf: study
 ---
 
 
