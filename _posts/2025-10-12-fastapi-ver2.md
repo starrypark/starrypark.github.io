@@ -2,7 +2,7 @@
 title: "FastAPI (2): async/await와 파일 업로드 처리"
 author: starrypark
 date: 2025-10-12 00:00:00 +0900
-categories: [개발, 백엔드]
+categories: [개발, FastAPI]
 tags: [fastapi, python, async, await, uploadfile, httpexception, backend]
 pin: false
 math: true

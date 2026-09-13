@@ -3,7 +3,7 @@ title: "Bayesian UQ 심화: MCMC, Credible Interval, 그리고 LLM에서의 한�
 description: Gibbs sampling, MH algorithm, HPD interval을 정리하고 전통적 UQ 방법이 LLM에 적용되기 어려운 이유를 분석한 세미나 노트.
 author: starrypark
 date: 2025-08-26 00:00:00 +0810
-categories: [통계, 불확실성 정량화]
+categories: [통계, 불확실성 계량화]
 tags: [mcmc, gibbs sampling, metropolis-hastings, credible interval, llm, bayesian]
 pin: false
 math: true

@@ -1,9 +1,9 @@
 ---
-title: "딥러닝에서의 불확실성 정량화: Softmax에서 Variational Inference까지"
+title: "딥러닝에서의 불확실성 계량화: Softmax에서 Variational Inference까지"
 description: Softmax의 한계, 신경망 calibration, Bayesian Neural Network, Variational Inference, Laplace Approximation을 정리한 세미나 노트.
 author: starrypark
 date: 2025-09-04 00:00:00 +0810
-categories: [통계, 불확실성 정량화]
+categories: [통계, 불확실성 계량화]
 tags: [bayesian neural network, variational inference, laplace approximation, calibration, deep learning, uq]
 pin: false
 math: true

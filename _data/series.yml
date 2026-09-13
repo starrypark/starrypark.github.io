@@ -2,7 +2,7 @@
   title: 공간통계 학습 노트
   description: 공간 확률 과정부터 비모수 모델까지, 챕터 순서대로 읽는 노트.
 - id: uq
-  title: 불확실성 정량화 이해하기
+  title: 불확실성 계량화 이해하기
   description: 통계적 기초와 Bayesian UQ, 딥러닝, Conformal Prediction으로 이어집니다.
 - id: fastapi
   title: FastAPI 기초

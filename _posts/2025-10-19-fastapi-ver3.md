@@ -3,7 +3,7 @@ title: "FastAPI (3): CORS, Middleware, 그리고 서버 구조"
 
 author: starrypark
 date: 2025-10-19 00:00:00 +0900
-categories: [개발, 백엔드]
+categories: [개발, FastAPI]
 tags: [fastapi, python, cors, middleware, jinja2, session, backend]
 pin: false
 math: true
